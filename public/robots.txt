@@ -1,0 +1,15 @@
+# robots.txt for WibraniumTech Digital Forge
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private pages
+Disallow: /admin
+Disallow: /login
+Disallow: /signup
+
+# Sitemap location
+Sitemap: https://wibraniumtech.com/sitemap.xml
+
+# Crawl delay (optional, adjust as needed)
+Crawl-delay: 1
