@@ -158,3 +158,120 @@ export function Card3DTilt({ children, className = "" }: { children: React.React
         </motion.div>
     );
 }
+
+// --- NEW COMPONENTS ---
+
+export function TechParticles3D() {
+    // Generate random particles
+    const particles = Array.from({ length: 15 }).map((_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 4 + 2,
+        duration: Math.random() * 10 + 10,
+    }));
+
+    return (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {particles.map((p) => (
+                <motion.div
+                    key={p.id}
+                    className="absolute rounded-full bg-primary/40 blur-[1px]"
+                    style={{
+                        left: `${p.x}%`,
+                        top: `${p.y}%`,
+                        width: p.size,
+                        height: p.size,
+                    }}
+                    animate={{
+                        y: [0, -40, 0],
+                        opacity: [0.2, 0.8, 0.2],
+                        scale: [1, 1.5, 1],
+                    }}
+                    transition={{
+                        duration: p.duration,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                />
+            ))}
+        </div>
+    );
+}
+
+export function GlowingOrbs3D() {
+    return (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <motion.div
+                className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-[100px]"
+                animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                    x: [0, 50, 0],
+                }}
+                transition={{
+                    duration: 15,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+            />
+            <motion.div
+                className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px]"
+                animate={{
+                    scale: [1.2, 1, 1.2],
+                    opacity: [0.2, 0.5, 0.2],
+                    y: [0, -50, 0],
+                }}
+                transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+            />
+        </div>
+    );
+}
+
+export function CircuitLines3D() {
+    return (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <svg className="w-full h-full opacity-30">
+                <defs>
+                    <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="transparent" />
+                        <stop offset="50%" stopColor="var(--primary)" />
+                        <stop offset="100%" stopColor="transparent" />
+                    </linearGradient>
+                </defs>
+                {/* Random Circuit Lines */}
+                <motion.path
+                    d="M0 100 H 200 V 300 H 500 V 200 H 800"
+                    stroke="url(#circuit-gradient)"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                />
+                <motion.path
+                    d="M100 0 V 150 H 400 V 500"
+                    stroke="url(#circuit-gradient)"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 4, delay: 1, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                />
+                <motion.path
+                    d="M800 600 H 500 V 400 H 200"
+                    stroke="url(#circuit-gradient)"
+                    strokeWidth="2"
+                    fill="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 3.5, delay: 0.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                />
+            </svg>
+        </div>
+    );
+}

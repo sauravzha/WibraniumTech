@@ -37,7 +37,7 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? "glass-dark shadow-premium backdrop-blur-xl"
+        ? "glass-dark shadow-premium backdrop-blur-xl border-b border-white/10"
         : "bg-transparent"
         }`}
     >
@@ -50,8 +50,8 @@ export function Navbar() {
               {/* Outer ring - gradient, slow spin */}
               <div className="absolute inset-0 rounded-full border-4 border-transparent logo-spin-slow"
                 style={{
-                  borderImage: 'linear-gradient(135deg, hsl(207, 90%, 54%), hsl(207, 70%, 60%), transparent, transparent) 1',
-                  filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.4))'
+                  borderImage: 'linear-gradient(135deg, hsl(190, 100%, 50%), hsl(260, 100%, 65%), transparent, transparent) 1',
+                  filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.6))'
                 }}></div>
 
               {/* Middle ring - solid color, medium spin */}
@@ -63,7 +63,7 @@ export function Navbar() {
                 style={{ filter: 'blur(0.5px)' }}></div>
 
               {/* Pulsing glow effect */}
-              <div className="absolute inset-[-2px] rounded-full opacity-50 blur-md bg-gradient-to-r from-primary/30 to-transparent animate-pulse"></div>
+              <div className="absolute inset-[-2px] rounded-full opacity-50 blur-md bg-gradient-to-r from-cyan-400/50 to-purple-500/50 animate-pulse"></div>
 
               {/* Static logo in center */}
               <img
@@ -94,10 +94,12 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <Button asChild variant="default" className="btn-primary ripple-effect">
-              <Link to="/contact">Get a Quote</Link>
+            <Button asChild variant="default" className="btn-primary ripple-effect relative overflow-hidden group">
+              <Link to="/contact">
+                <span className="relative z-10">Get a Quote</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Link>
             </Button>
           </div>
 

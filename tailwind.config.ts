@@ -61,12 +61,19 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         wibranium: {
-          blue: "hsl(207, 90%, 54%)",
-          "blue-dark": "hsl(207, 90%, 40%)",
-          "blue-light": "hsl(207, 90%, 65%)",
-          slate: "hsl(215, 25%, 12%)",
-          "slate-light": "hsl(215, 20%, 25%)",
+          blue: "hsl(190, 100%, 50%)", // Neon Cyan
+          "blue-dark": "hsl(222, 47%, 11%)", // Deep Navy
+          "blue-light": "hsl(190, 100%, 70%)",
+          slate: "hsl(222, 47%, 11%)",
+          "slate-light": "hsl(217, 33%, 17%)",
+          "electric-violet": "hsl(260, 100%, 65%)",
+          "neon-cyan": "hsl(190, 100%, 50%)",
         },
+        electric: {
+          violet: "hsl(260, 100%, 65%)",
+          cyan: "hsl(190, 100%, 50%)",
+          deep: "hsl(222, 47%, 11%)",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -109,14 +116,16 @@ export default {
         "fade-in": "fade-in 0.5s ease-out",
         "slide-in-right": "slide-in-right 0.5s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
-        "float": "float 3s ease-in-out infinite",
+        "float": "float 6s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "shimmer-slide": "shimmer 2.5s infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "hero-pattern": "linear-gradient(135deg, hsl(215, 30%, 8%) 0%, hsl(215, 40%, 15%) 50%, hsl(207, 60%, 20%) 100%)",
-        "card-gradient": "linear-gradient(145deg, hsl(0, 0%, 100%) 0%, hsl(207, 30%, 98%) 100%)",
-        "blue-gradient": "linear-gradient(135deg, hsl(207, 90%, 54%) 0%, hsl(207, 90%, 40%) 100%)",
+        "hero-pattern": "linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(217, 33%, 17%) 50%, hsl(222, 47%, 13%) 100%)",
+        "card-gradient": "linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.6) 100%)",
+        "blue-gradient": "linear-gradient(135deg, hsl(190, 100%, 50%) 0%, hsl(260, 100%, 65%) 100%)",
+        "electric-gradient": "linear-gradient(135deg, hsl(190, 100%, 50%) 0%, hsl(260, 100%, 65%) 100%)",
       },
     },
   },

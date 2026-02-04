@@ -30,6 +30,8 @@ import {
   Zap,
   Lightbulb
 } from "lucide-react";
+import { ServiceSection3D } from "@/components/ServiceSection3D";
+import { TechParticles3D, GeometricGrid3D } from "@/components/3DElements";
 
 const services = [
   {
@@ -227,13 +229,15 @@ export default function Services() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="section-padding bg-hero-pattern text-white">
-        <div className="container-custom">
+      <section className="section-padding bg-hero-pattern text-white relative overflow-hidden">
+        <TechParticles3D />
+        <GeometricGrid3D />
+        <div className="container-custom relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6"
+              className="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6 backdrop-blur-md border border-white/5"
             >
               Our Services
             </motion.span>
@@ -260,75 +264,15 @@ export default function Services() {
       </section>
 
       {/* Services Detail Sections */}
-      {services.map((service, index) => (
-        <section
-          key={service.id}
-          id={service.id}
-          className={`section-padding ${index % 2 === 1 ? "bg-secondary/30" : ""}`}
-        >
-          <div className="container-custom">
-            <div className={`grid lg:grid-cols-2 gap-16 items-center ${index % 2 === 1 ? "lg:grid-flow-dense" : ""}`}>
-              <motion.div
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className={index % 2 === 1 ? "lg:col-start-2" : ""}
-              >
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
-                  <service.icon className="h-8 w-8 text-primary" />
-                </div>
-                <h2 className="heading-3 mb-4">{service.title}</h2>
-                <p className="text-muted-foreground text-lg mb-6">{service.description}</p>
-
-                {/* Features */}
-                <div className="mb-6">
-                  <h4 className="font-semibold mb-3">Services Included / What We Offer:</h4>
-                  <div className="grid gap-2">
-                    {service.features.map((feature) => (
-                      <div key={feature} className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-sm">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <Button asChild className="btn-primary">
-                  <Link to="/contact">
-                    Get Started
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: index % 2 === 0 ? 30 : -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className={index % 2 === 1 ? "lg:col-start-1" : ""}
-              >
-                {/* Benefits Card */}
-                <div className="bg-card rounded-2xl border border-border p-8">
-                  <h4 className="font-semibold mb-4">Key Benefits / Applications:</h4>
-                  <div className="grid gap-3">
-                    {service.benefits.map((benefit) => (
-                      <div
-                        key={benefit}
-                        className="flex items-center gap-3 p-3 bg-secondary rounded-lg"
-                      >
-                        <Check className="h-5 w-5 text-primary shrink-0" />
-                        <span className="text-sm font-medium">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-      ))}
+      <div className="relative">
+        {services.map((service, index) => (
+          <ServiceSection3D
+            key={service.id}
+            {...service}
+            index={index}
+          />
+        ))}
+      </div>
 
       {/* CTA Section */}
       <section className="section-padding bg-hero-pattern text-white">

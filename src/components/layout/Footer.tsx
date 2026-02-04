@@ -121,7 +121,7 @@ export function Footer() {
                 <li className="flex items-start gap-3 group">
                   <MapPin className="h-5 w-5 text-primary mt-0.5 transition-transform duration-300 group-hover:scale-110" />
                   <span className="text-gray-400 text-sm">
-                    Your Business Location
+                    New Delhi, India
                   </span>
                 </li>
               </ul>
