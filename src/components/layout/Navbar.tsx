@@ -46,21 +46,17 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative w-12 h-12 transition-transform duration-300 group-hover:scale-110">
-              {/* Multiple spinning rings with different speeds and effects */}
-              {/* Outer ring - gradient, slow spin */}
-              <div className="absolute inset-0 rounded-full border-4 border-transparent logo-spin-slow"
-                style={{
-                  borderImage: 'linear-gradient(135deg, hsl(190, 100%, 50%), hsl(260, 100%, 65%), transparent, transparent) 1',
-                  filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.6))'
-                }}></div>
+              {/* Spinning circular rings only - no border-image (causes square corners) */}
+              {/* Outer ring - solid cyan */}
+              <div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-cyan-400 border-r-cyan-400/50 logo-spin-slow"
+                style={{ filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.6))' }}></div>
 
-              {/* Middle ring - solid color, medium spin */}
+              {/* Middle ring - primary blue */}
               <div className="absolute inset-[3px] rounded-full border-[3px] border-transparent border-t-primary border-r-primary/60 logo-spin-continuous"
                 style={{ filter: 'drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))' }}></div>
 
-              {/* Inner ring - bright accent, fast spin */}
-              <div className="absolute inset-[6px] rounded-full border-2 border-transparent border-t-primary/80 logo-spin-fast"
-                style={{ filter: 'blur(0.5px)' }}></div>
+              {/* Inner ring - fast spin */}
+              <div className="absolute inset-[6px] rounded-full border-2 border-transparent border-t-primary/80 logo-spin-fast"></div>
 
               {/* Pulsing glow effect */}
               <div className="absolute inset-[-2px] rounded-full opacity-50 blur-md bg-gradient-to-r from-cyan-400/50 to-purple-500/50 animate-pulse"></div>

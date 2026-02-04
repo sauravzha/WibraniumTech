@@ -26,20 +26,17 @@ export function LoadingScreen() {
                     <div className="text-center">
                         {/* Logo with Advanced Spinning Rings */}
                         <div className="mb-6 relative inline-block">
-                            {/* Outer orbital ring - slow, gradient */}
-                            <div className="absolute inset-[-8px] rounded-full border-[6px] border-transparent logo-spin-slow"
-                                style={{
-                                    borderImage: 'linear-gradient(135deg, hsl(207, 90%, 54%), hsl(207, 70%, 60%), transparent, transparent) 1',
-                                    filter: 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.5))'
-                                }}></div>
+                            {/* Spinning circular rings only - no border-image (causes square corners) */}
+                            {/* Outer ring - solid cyan, slow spin */}
+                            <div className="absolute inset-[-8px] rounded-full border-[4px] border-transparent border-t-cyan-400 border-r-cyan-400/50 logo-spin-slow"
+                                style={{ filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.5))' }}></div>
 
-                            {/* Middle ring - medium speed, solid */}
+                            {/* Middle ring - primary blue */}
                             <div className="absolute inset-[-2px] rounded-full border-[5px] border-transparent border-t-primary border-r-primary/70 logo-spin-continuous"
                                 style={{ filter: 'drop-shadow(0 0 12px rgba(59, 130, 246, 0.7))' }}></div>
 
-                            {/* Inner ring - fast, bright accent */}
-                            <div className="absolute inset-[2px] rounded-full border-[3px] border-transparent border-t-primary/90 border-b-primary/40 logo-spin-fast"
-                                style={{ filter: 'blur(1px)' }}></div>
+                            {/* Inner ring - fast, bright */}
+                            <div className="absolute inset-[2px] rounded-full border-[3px] border-transparent border-t-primary/90 border-b-primary/40 logo-spin-fast"></div>
 
                             {/* Rotating glow orbs */}
                             <div className="absolute inset-0 logo-spin-continuous">
