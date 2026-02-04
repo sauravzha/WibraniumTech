@@ -256,7 +256,7 @@ export default function Index() {
                 className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               >
                 <Button asChild size="lg" className="btn-primary text-base h-12 px-8">
-                  <Link to="/contact">
+                  <Link to="/contact#send-message">
                     Get a Quote
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
@@ -279,8 +279,8 @@ export default function Index() {
                 className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/10 justify-center lg:justify-start"
               >
                 {[
-                  { value: 50, label: "Projects Delivered", suffix: "+" },
-                  { value: 30, label: "Happy Clients", suffix: "+" },
+                  { value: 80, label: "Projects Delivered", suffix: "+" },
+                  { value: 60, label: "Happy Clients", suffix: "+" },
                   { value: 5, label: "Years Experience", suffix: "+" },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
@@ -579,7 +579,7 @@ export default function Index() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" className="btn-primary h-12 px-8">
-                <Link to="/contact">
+                <Link to="/portfolio">
                   Start Your Project
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>

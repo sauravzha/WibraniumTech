@@ -40,8 +40,8 @@ export function Footer() {
                   Wibranium<span className="text-primary">Tech</span>
                 </span>
               </Link>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Building Smart Digital Solutions for Growing Businesses. We transform ideas into powerful digital experiences.
+              <p className="text-gray-400 text-sm leading-relaxed text-balance">
+                We deliver enterprise-grade digital solutions built for scale, security, and performance, helping organizations transform complex challenges into intelligent, reliable digital systems.
               </p>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
@@ -133,7 +133,7 @@ export function Footer() {
         <ScrollAnimation direction="up" delay={0.4}>
           <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              © 2021 – WibraniumTech. All rights reserved.
+              © 2022 – WibraniumTech. All rights reserved.
             </p>
             <div className="flex gap-6">
               <Link to="/privacy" className="text-gray-400 hover:text-primary text-sm transition-all duration-300 hover:translate-y-[-2px]">

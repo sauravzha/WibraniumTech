@@ -170,7 +170,7 @@ export default function Contact() {
               viewport={{ once: true }}
               className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 shadow-lg h-full"
             >
-              <h2 className="heading-3 mb-8">Send Us a Message</h2>
+              <h2 id="send-message" className="heading-3 mb-8 scroll-mt-24">Send Us a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">

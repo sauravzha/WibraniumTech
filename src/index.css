@@ -5,61 +5,67 @@
 @tailwind utilities;
 
 @layer base {
+
+  /* Base Variables - Light Mode Default (if .dark is not present) */
   :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 210 40% 98%;
+    /* Very light gray/white */
+    --foreground: 222 47% 11%;
+    /* Dark Navy Text */
 
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 190 100% 50%;
-    /* Neon Cyan */
-    --primary-foreground: 222 47% 11%;
+    --primary: 190 100% 40%;
+    /* Darker Cyan for visibility on white */
+    --primary-foreground: 210 40% 98%;
 
     --secondary: 260 100% 65%;
     /* Electric Violet */
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 210 40% 90%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 190 100% 50%;
+    --accent: 190 100% 40%;
     --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 63% 31%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 190 100% 50%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 190 100% 40%;
 
     --radius: 0.75rem;
 
-    /* Custom WibraniumTech tokens - Electric Future */
-    --gradient-primary: linear-gradient(135deg, hsl(190, 100%, 50%) 0%, hsl(260, 100%, 65%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(217, 33%, 17%) 50%, hsl(222, 47%, 13%) 100%);
-    --gradient-dark: linear-gradient(180deg, hsl(222, 47%, 11%) 0%, hsl(220, 40%, 15%) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.6) 100%);
-    --gradient-blue-glow: linear-gradient(180deg, rgba(6, 182, 212, 0.2) 0%, transparent 100%);
+    /* Custom tokens - Light Mode */
+    --gradient-primary: linear-gradient(135deg, hsl(190, 100%, 45%) 0%, hsl(260, 100%, 65%) 100%);
+    /* Lighter hero gradient */
+    --gradient-hero: linear-gradient(135deg, hsl(210, 40%, 98%) 0%, hsl(210, 40%, 95%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(210, 40%, 98%) 0%, hsl(220, 14%, 96%) 100%);
+    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(243, 244, 246, 0.8) 100%);
+    --gradient-blue-glow: linear-gradient(180deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);
 
-    --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 16px 48px -16px rgba(0, 0, 0, 0.4);
-    --shadow-glow: 0 0 40px rgba(6, 182, 212, 0.3);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-glow: 0 0 20px rgba(6, 182, 212, 0.2);
 
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 190 100% 50%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 190 100% 50%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
   }
 
+  /* Dark Mode Overrides */
   .dark {
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
@@ -88,6 +94,18 @@
     --border: 217 33% 17%;
     --input: 217 33% 17%;
     --ring: 190 100% 50%;
+
+    /* Custom tokens - Dark Mode */
+    --gradient-primary: linear-gradient(135deg, hsl(190, 100%, 50%) 0%, hsl(260, 100%, 65%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(217, 33%, 17%) 50%, hsl(222, 47%, 13%) 100%);
+    --gradient-dark: linear-gradient(180deg, hsl(222, 47%, 11%) 0%, hsl(220, 40%, 15%) 100%);
+    --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.6) 100%);
+    --gradient-blue-glow: linear-gradient(180deg, rgba(6, 182, 212, 0.2) 0%, transparent 100%);
+
+    --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 16px 48px -16px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 40px rgba(6, 182, 212, 0.3);
 
     --sidebar-background: 222 47% 11%;
     --sidebar-foreground: 210 40% 98%;

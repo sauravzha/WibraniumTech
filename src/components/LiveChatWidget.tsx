@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MessageCircle, Send } from 'lucide-react';
+import { X, MessageCircle, Send, User, Paperclip, Loader2, Minimize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 
 interface Message {
@@ -13,27 +12,29 @@ interface Message {
     timestamp: Date;
 }
 
+type Department = 'Support' | 'Sales' | 'General';
+
 export function LiveChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState<Message[]>([
-        {
-            id: 1,
-            text: 'Hi! 👋 Welcome to WibraniumTech. How can we help you today?',
-            sender: 'bot',
-            timestamp: new Date(),
-        },
-    ]);
+    const [isStarted, setIsStarted] = useState(false);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [inputValue, setInputValue] = useState('');
+    const [isTyping, setIsTyping] = useState(false);
+
+    // User Details
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
-    const [isStarted, setIsStarted] = useState(false);
+    const [department, setDepartment] = useState<Department>('General');
 
-    const quickResponses = [
-        'Tell me about your services',
-        'I need a quote',
-        'How do I get started?',
-        'Do you offer support?',
-    ];
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages, isTyping, isOpen]);
 
     const handleStart = () => {
         if (!userName.trim() || !userEmail.trim()) {
@@ -48,18 +49,25 @@ export function LiveChatWidget() {
         }
 
         setIsStarted(true);
-        setMessages((prev) => [
-            ...prev,
+
+        // Initial Bot Message based on Department
+        const initialText = department === 'Sales'
+            ? `Hi ${userName}! 👋 I'm Alice from the Sales team. I'd love to help you find the right solution for your business. What are you looking for today?`
+            : department === 'Support'
+                ? `Hello ${userName}. This is Technical Support. Please describe the issue you're facing, and I'll do my best to resolve it.`
+                : `Welcome back, ${userName}! How can we assist you today?`;
+
+        setMessages([
             {
                 id: Date.now(),
-                text: `Great to meet you, ${userName}! What can I help you with?`,
+                text: initialText,
                 sender: 'bot',
                 timestamp: new Date(),
             },
         ]);
     };
 
-    const handleSendMessage = (text?: string) => {
+    const handleSendMessage = async (text?: string) => {
         const messageText = text || inputValue.trim();
         if (!messageText) return;
 
@@ -73,26 +81,24 @@ export function LiveChatWidget() {
 
         setMessages((prev) => [...prev, userMessage]);
         setInputValue('');
+        setIsTyping(true);
 
-        // Simulate bot response
+        // Simulate thinking delay
+        const delay = Math.random() * 1000 + 1500; // 1.5s - 2.5s delay
+
         setTimeout(() => {
             let botResponse = '';
+            const lowerMsg = messageText.toLowerCase();
 
-            if (messageText.toLowerCase().includes('service')) {
-                botResponse =
-                    'We offer Web Development, Mobile App Development, SEO, Video Editing, and CRM solutions. Which service interests you most?';
-            } else if (messageText.toLowerCase().includes('quote') || messageText.toLowerCase().includes('price')) {
-                botResponse =
-                    'I\'d be happy to provide a quote! Could you tell me more about your project requirements? Or you can fill out our contact form for a detailed quote.';
-            } else if (messageText.toLowerCase().includes('start') || messageText.toLowerCase().includes('begin')) {
-                botResponse =
-                    'Getting started is easy! Just tell us about your project, and our team will reach out within 24 hours to discuss next steps.';
-            } else if (messageText.toLowerCase().includes('support')) {
-                botResponse =
-                    'Yes, we provide comprehensive support and maintenance packages for all our projects. Would you like to know more about our support options?';
+            // Simple Keyword Matching Logic
+            if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('quote')) {
+                botResponse = "Our pricing is tailored to project requirements. Could you share a bit more about the features you need? I can arrange a call with a senior consultant.";
+            } else if (lowerMsg.includes('service') || lowerMsg.includes('offer')) {
+                botResponse = "We specialize in Custom Software, Web Development, and Industrial Automation. Would you like to see some of our recent case studies?";
+            } else if (lowerMsg.includes('human') || lowerMsg.includes('agent')) {
+                botResponse = "I'm an AI assistant helping triage requests, but I've flagged this conversation for our specialized human team. They will email you shortly at " + userEmail + ".";
             } else {
-                botResponse =
-                    'Thanks for your message! Our team will get back to you shortly. In the meantime, feel free to browse our services or contact us directly.';
+                botResponse = "Thanks for sharing that. I've noted it down. Is there anything specific regarding the timeline or budget you'd like to add?";
             }
 
             const botMessage: Message = {
@@ -103,151 +109,209 @@ export function LiveChatWidget() {
             };
 
             setMessages((prev) => [...prev, botMessage]);
-        }, 1000);
+            setIsTyping(false);
+        }, delay);
     };
-
-    useEffect(() => {
-        if (isOpen && isStarted) {
-            const messagesContainer = document.getElementById('chat-messages');
-            if (messagesContainer) {
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }
-        }
-    }, [messages, isOpen, isStarted]);
 
     return (
         <>
-            {/* Chat Button */}
+            {/* Toggle Button */}
             <AnimatePresence>
                 {!isOpen && (
                     <motion.button
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setIsOpen(true)}
-                        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+                        className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-full shadow-[0_0_20px_rgba(6,182,212,0.5)] flex items-center justify-center group"
                     >
-                        <MessageCircle className="h-7 w-7 text-white" />
-                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
+                        <MessageCircle className="h-7 w-7 text-white fill-current" />
+                        <span className="absolute top-0 right-0 flex h-4 w-4">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white"></span>
+                        </span>
                     </motion.button>
                 )}
             </AnimatePresence>
 
-            {/* Chat Window */}
+            {/* Main Chat Window */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 50, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-3rem)] bg-card border border-border rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+                        exit={{ opacity: 0, y: 50, scale: 0.9 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[600px] max-h-[calc(100vh-5rem)] flex flex-col overflow-hidden rounded-2xl shadow-2xl glass-card border border-white/20"
                     >
                         {/* Header */}
-                        <div className="bg-primary text-white p-4 flex items-center justify-between">
+                        <div className="bg-gradient-to-r from-cyan-600 to-blue-700 p-4 flex items-center justify-between shrink-0">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                                    <MessageCircle className="h-5 w-5" />
+                                <div className="relative">
+                                    <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center border border-white/30 backdrop-blur-sm">
+                                        <User className="h-6 w-6 text-white" />
+                                    </div>
+                                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-blue-700 rounded-full"></span>
                                 </div>
-                                <div>
-                                    <h3 className="font-semibold">WibraniumTech Support</h3>
-                                    <p className="text-xs opacity-90">We typically reply instantly</p>
+                                <div className="text-white">
+                                    <h3 className="font-bold text-sm leading-tight">Wibranium Support</h3>
+                                    <p className="text-xs text-white/80">Online • Replies instantly</p>
                                 </div>
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
-                                className="hover:bg-white/10 rounded-lg p-1 transition-colors"
-                                title="Close chat"
-                                aria-label="Close chat window"
+                                className="text-white/80 hover:text-white hover:bg-white/10 p-2 rounded-lg transition-colors"
                             >
-                                <X className="h-5 w-5" />
+                                <Minimize2 className="h-5 w-5" />
                             </button>
                         </div>
 
+                        {/* Content Area */}
                         {!isStarted ? (
-                            /* Start Form */
-                            <div className="flex-1 p-6 flex flex-col justify-center">
-                                <h4 className="text-lg font-semibold mb-2">Welcome to WibraniumTech!</h4>
-                                <p className="text-sm text-muted-foreground mb-6">
-                                    Fill in your details to start chatting with us.
-                                </p>
+                            // Welcome / Login Screen
+                            <div className="flex-1 p-6 flex flex-col bg-background/95 backdrop-blur-3xl">
+                                <div className="text-center mb-6">
+                                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <MessageCircle className="h-8 w-8 text-primary" />
+                                    </div>
+                                    <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600">
+                                        Welcome to WibraniumTech
+                                    </h2>
+                                    <p className="text-sm text-muted-foreground mt-2">
+                                        We help businesses build digital excellence. How can we help you today?
+                                    </p>
+                                </div>
+
                                 <div className="space-y-4">
-                                    <Input
-                                        placeholder="Your Name"
-                                        value={userName}
-                                        onChange={(e) => setUserName(e.target.value)}
-                                    />
-                                    <Input
-                                        type="email"
-                                        placeholder="Your Email"
-                                        value={userEmail}
-                                        onChange={(e) => setUserEmail(e.target.value)}
-                                    />
-                                    <Button onClick={handleStart} className="w-full btn-primary">
-                                        Start Chat
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-medium text-muted-foreground ml-1">Full Name</label>
+                                        <Input
+                                            placeholder="John Doe"
+                                            value={userName}
+                                            onChange={(e) => setUserName(e.target.value)}
+                                            className="bg-secondary/50 border-white/10"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-medium text-muted-foreground ml-1">Email Address</label>
+                                        <Input
+                                            type="email"
+                                            placeholder="john@example.com"
+                                            value={userEmail}
+                                            onChange={(e) => setUserEmail(e.target.value)}
+                                            className="bg-secondary/50 border-white/10"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-medium text-muted-foreground ml-1">Department</label>
+                                        <div className="grid grid-cols-3 gap-2">
+                                            {(['General', 'Sales', 'Support'] as Department[]).map((dept) => (
+                                                <button
+                                                    key={dept}
+                                                    onClick={() => setDepartment(dept)}
+                                                    className={`text-xs py-2 px-1 rounded-lg border transition-all duration-200 ${department === dept
+                                                            ? 'bg-primary text-white border-primary shadow-lg shadow-cyan-500/20'
+                                                            : 'bg-secondary/30 border-transparent hover:bg-secondary/60 text-muted-foreground'
+                                                        }`}
+                                                >
+                                                    {dept}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <Button
+                                        onClick={handleStart}
+                                        className="w-full btn-primary bg-gradient-to-r from-cyan-500 to-blue-600 h-10 mt-2 shadow-lg hover:shadow-cyan-500/25 transition-all"
+                                    >
+                                        Start Conversation
+                                        <Send className="h-4 w-4 ml-2" />
                                     </Button>
                                 </div>
                             </div>
                         ) : (
-                            <>
-                                {/* Messages */}
-                                <div id="chat-messages" className="flex-1 overflow-y-auto p-4 space-y-4">
-                                    {messages.map((message) => (
-                                        <div
-                                            key={message.id}
-                                            className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                                        >
-                                            <div
-                                                className={`max-w-[80%] rounded-2xl px-4 py-2 ${message.sender === 'user'
-                                                    ? 'bg-primary text-white'
-                                                    : 'bg-secondary text-foreground'
-                                                    }`}
-                                            >
-                                                <p className="text-sm">{message.text}</p>
-                                                <p className="text-xs opacity-70 mt-1">
-                                                    {message.timestamp.toLocaleTimeString([], {
-                                                        hour: '2-digit',
-                                                        minute: '2-digit',
-                                                    })}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Quick Responses */}
-                                <div className="px-4 py-2 border-t border-border">
-                                    <div className="flex flex-wrap gap-2">
-                                        {quickResponses.map((response) => (
-                                            <button
-                                                key={response}
-                                                onClick={() => handleSendMessage(response)}
-                                                className="text-xs px-3 py-1.5 bg-secondary hover:bg-secondary/80 rounded-full transition-colors"
-                                            >
-                                                {response}
-                                            </button>
-                                        ))}
+                            // Chat Interface
+                            <div className="flex-1 flex flex-col bg-background/95 backdrop-blur-3xl min-h-0">
+                                {/* Message List */}
+                                <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
+                                    <div className="text-center text-xs text-muted-foreground my-4">
+                                        Today, {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                     </div>
+
+                                    <AnimatePresence initial={false}>
+                                        {messages.map((msg) => (
+                                            <motion.div
+                                                key={msg.id}
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                                            >
+                                                {msg.sender === 'bot' && (
+                                                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shrink-0 mr-2 mt-1">
+                                                        <span className="text-xs text-white font-bold">W</span>
+                                                    </div>
+                                                )}
+                                                <div
+                                                    className={`max-w-[80%] p-3 rounded-2xl shadow-sm text-sm leading-relaxed ${msg.sender === 'user'
+                                                            ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-tr-none'
+                                                            : 'bg-secondary border border-white/10 text-foreground rounded-tl-none'
+                                                        }`}
+                                                >
+                                                    {msg.text}
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </AnimatePresence>
+
+                                    {/* Typing Indicator */}
+                                    {isTyping && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="flex justify-start"
+                                        >
+                                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shrink-0 mr-2">
+                                                <span className="text-xs text-white font-bold">W</span>
+                                            </div>
+                                            <div className="bg-secondary border border-white/10 p-3 rounded-2xl rounded-tl-none flex items-center space-x-1 h-10 w-16 justify-center">
+                                                <div className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                                <div className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                                <div className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce"></div>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                    <div ref={messagesEndRef} />
                                 </div>
 
-                                {/* Input */}
-                                <div className="p-4 border-t border-border">
-                                    <div className="flex gap-2">
+                                {/* Input Area */}
+                                <div className="p-3 bg-secondary/30 border-t border-white/10 backdrop-blur-md">
+                                    <div className="flex items-center gap-2 bg-background/50 border border-white/10 rounded-xl p-1 pr-2 shadow-inner focus-within:ring-2 focus-within:ring-primary/50 transition-all">
+                                        <button className="p-2 text-muted-foreground hover:text-primary transition-colors hover:bg-white/5 rounded-lg">
+                                            <Paperclip className="h-4 w-4" />
+                                        </button>
                                         <Input
-                                            placeholder="Type your message..."
                                             value={inputValue}
                                             onChange={(e) => setInputValue(e.target.value)}
                                             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                                            placeholder="Type a message..."
+                                            className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 px-0 h-10"
                                         />
                                         <Button
-                                            onClick={() => handleSendMessage()}
                                             size="icon"
-                                            className="btn-primary shrink-0"
+                                            onClick={() => handleSendMessage()}
+                                            className="h-9 w-9 bg-primary hover:bg-primary/90 rounded-lg shadow-sm"
+                                            disabled={!inputValue.trim()}
                                         >
-                                            <Send className="h-4 w-4" />
+                                            <Send className="h-4 w-4 text-white" />
                                         </Button>
                                     </div>
+                                    <div className="text-[10px] text-center text-muted-foreground mt-2 opacity-50">
+                                        Powered by WibraniumTech AI
+                                    </div>
                                 </div>
-                            </>
+                            </div>
                         )}
                     </motion.div>
                 )}

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import logo from "@/assets/logo.png";
 
 
@@ -92,6 +93,7 @@ export function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
+            <ThemeToggle />
             <Button asChild variant="default" className="btn-primary ripple-effect relative overflow-hidden group">
               <Link to="/contact">
                 <span className="relative z-10">Get a Quote</span>
@@ -133,6 +135,10 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
+              <div className="flex items-center justify-between px-2">
+                <span className="text-sm font-medium text-muted-foreground">Theme</span>
+                <ThemeToggle />
+              </div>
               <Button asChild className="w-full btn-primary ripple-effect">
                 <Link to="/contact">Get a Quote</Link>
               </Button>
