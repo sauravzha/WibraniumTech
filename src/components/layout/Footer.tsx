@@ -7,10 +7,10 @@ import logo from "@/assets/logo.png";
 const footerLinks = {
   services: [
     { name: "Website Development", path: "/services#web" },
-    { name: "App Development", path: "/services#app" },
-    { name: "SEO Services", path: "/services#seo" },
-    { name: "Video Editing", path: "/services#video" },
-    { name: "CRM Software", path: "/services#crm" },
+    { name: "Custom Software", path: "/services#software" },
+    { name: "School Management", path: "/services#school" },
+    { name: "Industrial Automation", path: "/services#plc" },
+    { name: "Barcode Solutions", path: "/services#barcode" },
   ],
   company: [
     { name: "About Us", path: "/about" },
