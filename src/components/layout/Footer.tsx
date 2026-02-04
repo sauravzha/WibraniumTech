@@ -114,8 +114,8 @@ export function Footer() {
                 </li>
                 <li className="flex items-start gap-3 group">
                   <Phone className="h-5 w-5 text-primary mt-0.5 transition-transform duration-300 group-hover:scale-110" />
-                  <a href="tel:+1234567890" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                    +1 (234) 567-890
+                  <a href="tel:+918920617274" className="text-gray-400 hover:text-primary transition-colors text-sm">
+                    +91 89206 17274
                   </a>
                 </li>
                 <li className="flex items-start gap-3 group">
@@ -133,7 +133,7 @@ export function Footer() {
         <ScrollAnimation direction="up" delay={0.4}>
           <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} WibraniumTech. All rights reserved.
+              © 2021 – WibraniumTech. All rights reserved.
             </p>
             <div className="flex gap-6">
               <Link to="/privacy" className="text-gray-400 hover:text-primary text-sm transition-all duration-300 hover:translate-y-[-2px]">

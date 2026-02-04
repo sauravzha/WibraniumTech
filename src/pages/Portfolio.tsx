@@ -539,8 +539,8 @@ export default function Portfolio() {
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: 50, suffix: "+", label: "Projects Completed", icon: Check },
-              { value: 30, suffix: "+", label: "Happy Clients", icon: Users },
+              { value: 80, suffix: "+", label: "Projects Completed", icon: Check },
+              { value: 60, suffix: "+", label: "Happy Clients", icon: Users },
               { value: 5, suffix: "+", label: "Years Experience", icon: Zap },
               { value: 7, suffix: "", label: "Core Products", icon: Cpu },
             ].map((stat, index) => (

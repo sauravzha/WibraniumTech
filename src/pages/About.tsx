@@ -30,27 +30,27 @@ const values = [
 
 const timeline = [
   {
-    year: "2019",
+    year: "2022",
     title: "Foundation",
     description: "WibraniumTech was founded with a vision to empower businesses through technology.",
   },
   {
-    year: "2020",
+    year: "2023",
     title: "Expansion",
     description: "Expanded our services to include mobile app development and CRM solutions.",
   },
   {
-    year: "2021",
+    year: "2024",
     title: "Growth",
     description: "Crossed 25+ successful projects and established partnerships with key clients.",
   },
   {
-    year: "2023",
+    year: "2025",
     title: "Innovation",
     description: "Launched AI-powered solutions and advanced analytics services.",
   },
   {
-    year: "2024",
+    year: "2026",
     title: "Today",
     description: "Continuing to grow and deliver exceptional digital solutions globally.",
   },
@@ -122,7 +122,7 @@ export default function About() {
               <p className="text-muted-foreground leading-relaxed">
                 To be the leading technology partner for businesses worldwide,
                 enabling digital transformation and sustainable growth through
-                innovative solutions that make a real difference.
+                innovative solutions that make a real difference. Our vision is to shape the future of digital innovation by becoming a globally trusted technology partner. We aspire to empower businesses through intelligent systems, automation, and data-driven solutions. By embracing emerging technologies, we aim to build scalable and sustainable digital ecosystems. Our focus is on creating meaningful impact that goes beyond software. We envision technology as a catalyst for long-term business transformation.
               </p>
             </motion.div>
 
@@ -139,7 +139,7 @@ export default function About() {
               <p className="text-muted-foreground leading-relaxed">
                 To deliver exceptional digital solutions that empower businesses
                 to achieve their goals. We combine technical excellence with
-                strategic thinking to create impactful results.
+                strategic thinking to create impactful results. Our mission is to deliver world-class digital solutions that solve complex business challenges with clarity and precision. We combine deep technical expertise with strategic thinking to build reliable and future-ready systems. Through innovation, quality, and performance, we help organizations achieve operational excellence. We are committed to long-term partnerships built on trust and transparency. Our goal is to turn vision into measurable digital success.
               </p>
             </motion.div>
           </div>
@@ -227,57 +227,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Leadership Team */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeading
-            title="Our Leadership"
-            subtitle="Meet the visionaries behind WibraniumTech"
-          />
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-card rounded-2xl overflow-hidden border border-border hover-lift"
-            >
-              <div className="bg-gradient-to-br from-primary/20 to-secondary h-48 flex items-center justify-center">
-                <div className="w-32 h-32 rounded-full bg-primary/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/20">
-                  <Users className="h-16 w-16 text-primary" />
-                </div>
-              </div>
-              <div className="p-6 text-center">
-                <h3 className="text-2xl font-bold mb-1">Nirbhik Pratap Singh</h3>
-                <p className="text-primary font-medium mb-3">Director</p>
-                <p className="text-muted-foreground">
-                  Leading WibraniumTech with a vision to transform businesses through innovative digital solutions and cutting-edge technology.
-                </p>
-              </div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              viewport={{ once: true }}
-              className="bg-card rounded-2xl overflow-hidden border border-border hover-lift"
-            >
-              <div className="bg-gradient-to-br from-secondary to-primary/20 h-48 flex items-center justify-center">
-                <div className="w-32 h-32 rounded-full bg-primary/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/20">
-                  <Users className="h-16 w-16 text-primary" />
-                </div>
-              </div>
-              <div className="p-6 text-center">
-                <h3 className="text-2xl font-bold mb-1">Puneet Chandila</h3>
-                <p className="text-primary font-medium mb-3">Co-Founder</p>
-                <p className="text-muted-foreground">
-                  Driving growth and innovation at WibraniumTech, ensuring excellence in every project and fostering client success.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Team Section Placeholder */}
       <section className="section-padding">

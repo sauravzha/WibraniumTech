@@ -12,6 +12,7 @@ const navLinks = [
   { name: "Services", path: "/services" },
   { name: "Portfolio", path: "/portfolio" },
   { name: "Contact", path: "/contact" },
+  { name: "GYOD", path: "#" },
 ];
 
 export function Navbar() {
