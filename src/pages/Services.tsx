@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import { ServiceSection3D } from "@/components/ServiceSection3D";
 import { TechParticles3D, GeometricGrid3D } from "@/components/3DElements";
+import { GrowthLine3D, GrowthLineSimple } from "@/components/GrowthLine3D";
 
 const services = [
   {
@@ -228,37 +229,57 @@ const services = [
 export default function Services() {
   return (
     <Layout>
-      {/* Hero Section */}
+      {/* Hero Section with 3D Rising Line Graph */}
       <section className="section-padding bg-hero-pattern text-white relative overflow-hidden">
         <TechParticles3D />
         <GeometricGrid3D />
         <div className="container-custom relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6 backdrop-blur-md border border-white/5"
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Left: Text Content */}
+            <div className="max-w-xl lg:max-w-none">
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-block px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6 backdrop-blur-md border border-white/5"
+              >
+                Our Services
+              </motion.span>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="heading-1 mb-6"
+              >
+                Complete IT, Software, Automation & {" "}
+                <span className="gradient-text">Digital Solutions</span>
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-xl text-gray-300"
+              >
+                WibraniumTech provides end-to-end IT, Software, Automation, and Digital Services designed specially for schools, factories, and small-to-medium businesses.
+                Our focus is on simple, reliable, and cost-effective solutions that work smoothly at the ground level.
+              </motion.p>
+            </div>
+
+            {/* Right: 3D Rising Line Graph */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="relative z-0"
             >
-              Our Services
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="heading-1 mb-6"
-            >
-              Complete IT, Software, Automation & {" "}
-              <span className="gradient-text">Digital Solutions</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-gray-300"
-            >
-              WibraniumTech provides end-to-end IT, Software, Automation, and Digital Services designed specially for schools, factories, and small-to-medium businesses.
-              Our focus is on simple, reliable, and cost-effective solutions that work smoothly at the ground level.
-            </motion.p>
+              {/* Desktop: Full 3D animated graph */}
+              <div className="hidden lg:block">
+                <GrowthLine3D />
+              </div>
+              {/* Tablet/Mobile: Simplified static/lightly animated version */}
+              <div className="lg:hidden">
+                <GrowthLineSimple />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
