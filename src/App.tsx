@@ -11,6 +11,7 @@ import { ParticleBackground } from "@/components/ParticleBackground";
 import { ScrollProgress } from "@/components/AnimatedComponents";
 import { useEffect } from "react";
 import { initGA, trackPageView } from "@/lib/analytics";
+import { GYODSection } from "@/components/GYODSection";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -64,6 +65,7 @@ function AppContent() {
               }
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/gyod" element={<GYODSection />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

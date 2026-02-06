@@ -91,8 +91,7 @@ const mainProjects = [
     title: "Web Development",
     subtitle: "Modern & Scalable Websites",
     gradient: "from-blue-600 via-cyan-500 to-teal-400",
-    bgGlow: "rgba(6, 182, 212, 0.15)",
-    iconColor: "#06b6d4",
+    theme: "theme-cyan",
     techIcons: [Code, Database, Shield],
     features: [
       "Modern, responsive, and scalable websites for businesses and enterprises",
@@ -108,8 +107,7 @@ const mainProjects = [
     title: "App Development",
     subtitle: "Android & Cross-Platform Apps",
     gradient: "from-purple-600 via-violet-500 to-pink-400",
-    bgGlow: "rgba(168, 85, 247, 0.15)",
-    iconColor: "#a855f7",
+    theme: "theme-purple",
     techIcons: [Smartphone, Cloud, Zap],
     features: [
       "High-quality Android and cross-platform mobile applications",
@@ -125,8 +123,7 @@ const mainProjects = [
     title: "CRM – Customer Relationship Management",
     subtitle: "Smart Lead & Customer Management",
     gradient: "from-green-600 via-emerald-500 to-teal-400",
-    bgGlow: "rgba(16, 185, 129, 0.15)",
-    iconColor: "#10b981",
+    theme: "theme-emerald",
     techIcons: [Users, LineChart, Database],
     features: [
       "Powerful and customized CRM platform for managing leads and customers",
@@ -142,8 +139,7 @@ const mainProjects = [
     title: "SMS – School Management System",
     subtitle: "Complete School Operations Solution",
     gradient: "from-orange-500 via-amber-500 to-yellow-400",
-    bgGlow: "rgba(245, 158, 11, 0.15)",
-    iconColor: "#f59e0b",
+    theme: "theme-amber",
     techIcons: [GraduationCap, Database, Settings],
     features: [
       "Complete digital solution for managing school operations efficiently",
@@ -159,8 +155,7 @@ const mainProjects = [
     title: "HRM – Human Resources Management",
     subtitle: "Automated HR & Payroll System",
     gradient: "from-red-500 via-rose-500 to-pink-400",
-    bgGlow: "rgba(244, 63, 94, 0.15)",
-    iconColor: "#f43f5e",
+    theme: "theme-rose",
     techIcons: [UserCog, LineChart, Shield],
     features: [
       "Automated HRM system to manage the entire employee lifecycle",
@@ -181,8 +176,7 @@ const startupProducts = [
     fullTitle: "Smart Patient Health Monitoring Device",
     badge: "Medical Startup Product",
     gradient: "from-pink-500 via-rose-500 to-red-500",
-    bgGlow: "rgba(236, 72, 153, 0.2)",
-    iconColor: "#ec4899",
+    theme: "theme-pink",
     techIcons: [Heart, Activity, Cloud],
     features: [
       "IoT-based medical device for continuous patient health monitoring",
@@ -199,8 +193,7 @@ const startupProducts = [
     fullTitle: "Machine Automation Computer",
     badge: "Industrial Intelligence Platform",
     gradient: "from-cyan-500 via-blue-500 to-indigo-500",
-    bgGlow: "rgba(6, 182, 212, 0.2)",
-    iconColor: "#06b6d4",
+    theme: "theme-cyan-alt",
     techIcons: [Cpu, Settings, LineChart],
     features: [
       "Industrial production monitoring and automation intelligence platform",
@@ -267,16 +260,13 @@ export default function Portfolio() {
       <section className="section-padding relative">
         {/* Background grid pattern */}
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px)',
-            backgroundSize: '50px 50px'
-          }} />
+          <div className="absolute inset-0 bg-grid-pattern" />
         </div>
 
         <div className="container-custom relative z-10">
           <SectionHeading
             title="Core Solutions"
-            subtitle="Enterprise-grade products built for real-world business challenges"
+            description="Enterprise-grade products built for real-world business challenges"
           />
 
           <div className="space-y-8 mt-12">
@@ -287,12 +277,9 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="group"
+                className={`group ${project.theme}`}
               >
-                <div
-                  className="relative overflow-hidden rounded-3xl border border-white/10"
-                  style={{ background: `linear-gradient(135deg, ${project.bgGlow}, transparent 60%)` }}
-                >
+                <div className="relative overflow-hidden rounded-3xl border border-white/10 card-glow-bg">
                   {/* Gradient border effect */}
                   <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
 
@@ -304,8 +291,7 @@ export default function Portfolio() {
                         <div className="relative">
                           {/* Main icon container */}
                           <motion.div
-                            className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden"
-                            style={{ background: `linear-gradient(135deg, ${project.bgGlow}, rgba(15, 23, 42, 0.8))` }}
+                            className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden icon-glow-bg"
                             whileHover={{ scale: 1.02 }}
                             transition={{ duration: 0.3 }}
                           >
@@ -320,10 +306,7 @@ export default function Portfolio() {
                                 className="relative"
                               >
                                 {/* Central large icon */}
-                                <div
-                                  className={`w-32 h-32 rounded-3xl bg-gradient-to-br ${project.gradient} flex items-center justify-center shadow-2xl`}
-                                  style={{ boxShadow: `0 20px 60px ${project.bgGlow}` }}
-                                >
+                                <div className={`w-32 h-32 rounded-3xl bg-gradient-to-br ${project.gradient} flex items-center justify-center shadow-2xl icon-shadow-large`}>
                                   <project.icon className="w-16 h-16 text-white" />
                                 </div>
 
@@ -331,14 +314,7 @@ export default function Portfolio() {
                                 {project.techIcons.map((TechIcon, i) => (
                                   <motion.div
                                     key={i}
-                                    className="absolute w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20"
-                                    style={{
-                                      top: i === 0 ? '-20px' : i === 1 ? '50%' : 'auto',
-                                      bottom: i === 2 ? '-20px' : 'auto',
-                                      left: i === 0 ? '50%' : i === 1 ? '-30px' : 'auto',
-                                      right: i === 2 ? '-30px' : i === 1 ? 'auto' : 'auto',
-                                      transform: i === 0 ? 'translateX(-50%)' : i === 1 ? 'translateY(-50%)' : 'none',
-                                    }}
+                                    className={`absolute w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 orbit-pos-main-${i}`}
                                     animate={{
                                       y: [0, -8, 0],
                                       scale: [1, 1.1, 1],
@@ -350,7 +326,7 @@ export default function Portfolio() {
                                       ease: "easeInOut"
                                     }}
                                   >
-                                    <TechIcon className="w-5 h-5" style={{ color: project.iconColor }} />
+                                    <TechIcon className="w-5 h-5 text-theme" />
                                   </motion.div>
                                 ))}
                               </motion.div>
@@ -362,14 +338,12 @@ export default function Portfolio() {
 
                             {/* Glowing dots */}
                             <motion.div
-                              className="absolute top-8 left-8 w-2 h-2 rounded-full"
-                              style={{ background: project.iconColor }}
+                              className="absolute top-8 left-8 w-2 h-2 rounded-full bg-[var(--theme-color)]"
                               animate={{ opacity: [0.5, 1, 0.5] }}
                               transition={{ duration: 2, repeat: Infinity }}
                             />
                             <motion.div
-                              className="absolute bottom-8 right-8 w-3 h-3 rounded-full"
-                              style={{ background: project.iconColor }}
+                              className="absolute bottom-8 right-8 w-3 h-3 rounded-full bg-[var(--theme-color)]"
                               animate={{ opacity: [0.5, 1, 0.5] }}
                               transition={{ duration: 2, delay: 0.5, repeat: Infinity }}
                             />
@@ -389,22 +363,20 @@ export default function Portfolio() {
 
                         <ul className="space-y-4 mt-8">
                           {project.features.map((feature, i) => (
-                            <motion.li
-                              key={i}
-                              initial={{ opacity: 0, x: -20 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.3 + i * 0.1 }}
-                              viewport={{ once: true }}
-                              className="flex items-start gap-4"
-                            >
-                              <div
-                                className={`w-6 h-6 rounded-full bg-gradient-to-r ${project.gradient} flex items-center justify-center flex-shrink-0 mt-0.5`}
-                                style={{ boxShadow: `0 0 15px ${project.bgGlow}` }}
+                            <li key={i}>
+                              <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.3 + i * 0.1 }}
+                                viewport={{ once: true }}
+                                className="flex items-start gap-4"
                               >
-                                <Check className="w-3.5 h-3.5 text-white" />
-                              </div>
-                              <span className="text-gray-300 text-lg">{feature}</span>
-                            </motion.li>
+                                <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${project.gradient} flex items-center justify-center flex-shrink-0 mt-0.5 feature-check-shadow`}>
+                                  <Check className="w-3.5 h-3.5 text-white" />
+                                </div>
+                                <span className="text-gray-300 text-lg">{feature}</span>
+                              </motion.div>
+                            </li>
                           ))}
                         </ul>
                       </div>
@@ -426,7 +398,7 @@ export default function Portfolio() {
         <div className="container-custom relative z-10">
           <SectionHeading
             title="Innovation & R&D"
-            subtitle="Cutting-edge products developed through our research and startup initiatives"
+            description="Cutting-edge products developed through our research and startup initiatives"
           />
 
           <div className="grid md:grid-cols-2 gap-10 mt-12">
@@ -437,14 +409,11 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.6 }}
                 viewport={{ once: true }}
-                className="group"
+                className={`group ${product.theme}`}
               >
-                <div
-                  className="relative h-full overflow-hidden rounded-3xl border border-white/10"
-                  style={{ background: `linear-gradient(180deg, ${product.bgGlow}, transparent 60%)` }}
-                >
+                <div className="relative h-full overflow-hidden rounded-3xl border border-white/10 product-card-bg">
                   {/* Gradient hover effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-1 transition-opacity duration-500`} />
 
                   <div className="relative p-8">
                     {/* Badge */}
@@ -457,8 +426,7 @@ export default function Portfolio() {
                     {/* Icon Display */}
                     <div className="relative mb-8">
                       <motion.div
-                        className="w-full aspect-video rounded-2xl overflow-hidden flex items-center justify-center"
-                        style={{ background: `linear-gradient(135deg, ${product.bgGlow}, rgba(15, 23, 42, 0.9))` }}
+                        className="w-full aspect-video rounded-2xl overflow-hidden flex items-center justify-center icon-glow-bg"
                         whileHover={{ scale: 1.02 }}
                       >
                         <motion.div
@@ -469,10 +437,7 @@ export default function Portfolio() {
                           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                           className="relative"
                         >
-                          <div
-                            className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center`}
-                            style={{ boxShadow: `0 15px 40px ${product.bgGlow}` }}
-                          >
+                          <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center startup-icon-shadow`}>
                             <product.icon className="w-12 h-12 text-white" />
                           </div>
 
@@ -480,17 +445,11 @@ export default function Portfolio() {
                           {product.techIcons.map((TechIcon, i) => (
                             <motion.div
                               key={i}
-                              className="absolute w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20"
-                              style={{
-                                top: i === 0 ? '-15px' : 'auto',
-                                bottom: i === 2 ? '-15px' : 'auto',
-                                left: i === 1 ? '-25px' : i === 0 ? '60%' : 'auto',
-                                right: i === 2 ? '-25px' : 'auto',
-                              }}
+                              className={`absolute w-10 h-10 rounded-lg bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 orbit-pos-startup-${i}`}
                               animate={{ y: [0, -5, 0] }}
                               transition={{ duration: 2.5, delay: i * 0.3, repeat: Infinity }}
                             >
-                              <TechIcon className="w-4 h-4" style={{ color: product.iconColor }} />
+                              <TechIcon className="w-4 h-4 text-theme" />
                             </motion.div>
                           ))}
                         </motion.div>
@@ -509,17 +468,18 @@ export default function Portfolio() {
                     {/* Features */}
                     <ul className="space-y-3">
                       {product.features.map((feature, i) => (
-                        <motion.li
-                          key={i}
-                          className="flex items-start gap-3"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.3 + i * 0.1 }}
-                          viewport={{ once: true }}
-                        >
-                          <ChevronRight className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: product.iconColor }} />
-                          <span className="text-gray-400">{feature}</span>
-                        </motion.li>
+                        <li key={i}>
+                          <motion.div
+                            className="flex items-start gap-3"
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 + i * 0.1 }}
+                            viewport={{ once: true }}
+                          >
+                            <ChevronRight className="w-5 h-5 flex-shrink-0 mt-0.5 text-theme" />
+                            <span className="text-gray-400">{feature}</span>
+                          </motion.div>
+                        </li>
                       ))}
                     </ul>
                   </div>

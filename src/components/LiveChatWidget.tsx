@@ -163,6 +163,7 @@ export function LiveChatWidget() {
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className="text-white/80 hover:text-white hover:bg-white/10 p-2 rounded-lg transition-colors"
+                                aria-label="Minimize chat"
                             >
                                 <Minimize2 className="h-5 w-5" />
                             </button>
@@ -212,8 +213,8 @@ export function LiveChatWidget() {
                                                     key={dept}
                                                     onClick={() => setDepartment(dept)}
                                                     className={`text-xs py-2 px-1 rounded-lg border transition-all duration-200 ${department === dept
-                                                            ? 'bg-primary text-white border-primary shadow-lg shadow-cyan-500/20'
-                                                            : 'bg-secondary/30 border-transparent hover:bg-secondary/60 text-muted-foreground'
+                                                        ? 'bg-primary text-white border-primary shadow-lg shadow-cyan-500/20'
+                                                        : 'bg-secondary/30 border-transparent hover:bg-secondary/60 text-muted-foreground'
                                                         }`}
                                                 >
                                                     {dept}
@@ -255,8 +256,8 @@ export function LiveChatWidget() {
                                                 )}
                                                 <div
                                                     className={`max-w-[80%] p-3 rounded-2xl shadow-sm text-sm leading-relaxed ${msg.sender === 'user'
-                                                            ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-tr-none'
-                                                            : 'bg-secondary border border-white/10 text-foreground rounded-tl-none'
+                                                        ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-tr-none'
+                                                        : 'bg-secondary border border-white/10 text-foreground rounded-tl-none'
                                                         }`}
                                                 >
                                                     {msg.text}
@@ -288,7 +289,10 @@ export function LiveChatWidget() {
                                 {/* Input Area */}
                                 <div className="p-3 bg-secondary/30 border-t border-white/10 backdrop-blur-md">
                                     <div className="flex items-center gap-2 bg-background/50 border border-white/10 rounded-xl p-1 pr-2 shadow-inner focus-within:ring-2 focus-within:ring-primary/50 transition-all">
-                                        <button className="p-2 text-muted-foreground hover:text-primary transition-colors hover:bg-white/5 rounded-lg">
+                                        <button
+                                            className="p-2 text-muted-foreground hover:text-primary transition-colors hover:bg-white/5 rounded-lg"
+                                            aria-label="Attach file"
+                                        >
                                             <Paperclip className="h-4 w-4" />
                                         </button>
                                         <Input
