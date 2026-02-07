@@ -150,14 +150,34 @@ export default function About() {
       <section className="py-16 bg-secondary/30">
         <div className="container-custom">
           <div className="flex flex-col items-center text-center">
-            <motion.img
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              src={logo}
-              alt="WibraniumTech"
-              className="h-32 w-auto mb-6"
-            />
+              className="relative w-32 h-32 mb-6"
+            >
+              {/* Spinning circular rings */}
+              {/* Outer ring - solid cyan */}
+              <div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-cyan-400 border-r-cyan-400/50 logo-spin-slow"
+                style={{ filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.6))' }}></div>
+
+              {/* Middle ring - primary blue */}
+              <div className="absolute inset-[3px] rounded-full border-[3px] border-transparent border-t-primary border-r-primary/60 logo-spin-continuous"
+                style={{ filter: 'drop-shadow(0 0 4px rgba(59, 130, 246, 0.6))' }}></div>
+
+              {/* Inner ring - fast spin */}
+              <div className="absolute inset-[6px] rounded-full border-2 border-transparent border-t-primary/80 logo-spin-fast"></div>
+
+              {/* Pulsing glow effect */}
+              <div className="absolute inset-[-2px] rounded-full opacity-50 blur-md bg-gradient-to-r from-cyan-400/50 to-purple-500/50 animate-pulse"></div>
+
+              {/* Static logo in center */}
+              <img
+                src={logo}
+                alt="WibraniumTech"
+                className="relative w-full h-full object-contain p-2 z-10"
+              />
+            </motion.div>
             <h2 className="text-3xl font-bold mb-2">
               Wibranium<span className="text-primary">Tech</span>
             </h2>
@@ -227,41 +247,6 @@ export default function About() {
         </div>
       </section>
 
-
-
-      {/* Team Section Placeholder */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeading
-            badge="Our Team"
-            title="Meet the Experts Behind WibraniumTech"
-            description="Our talented team brings together diverse skills and experiences to deliver exceptional results."
-          />
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              { name: "Founder", role: "CEO & Lead Developer" },
-              { name: "Co-Founder", role: "CTO & Solutions Architect" },
-              { name: "Team Lead", role: "Project Manager" },
-            ].map((member, index) => (
-              <motion.div
-                key={member.role}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center p-6 bg-card rounded-2xl border border-border"
-              >
-                <div className="w-24 h-24 rounded-full bg-primary/10 mx-auto mb-4 flex items-center justify-center">
-                  <Users className="h-10 w-10 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold">{member.name}</h3>
-                <p className="text-sm text-muted-foreground">{member.role}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
     </Layout>
   );
 }

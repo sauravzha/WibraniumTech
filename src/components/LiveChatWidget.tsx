@@ -67,6 +67,117 @@ export function LiveChatWidget() {
         ]);
     };
 
+    // Knowledge Base - Comprehensive information about WibraniumTech
+    const knowledgeBase = {
+        greetings: {
+            keywords: ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'],
+            responses: [
+                "Hello! 👋 Welcome to WibraniumTech. How can I assist you today?",
+                "Hi there! Thanks for reaching out to WibraniumTech. What can I help you with?",
+                "Hey! Great to connect with you. How may I help you today?"
+            ]
+        },
+        company: {
+            keywords: ['who are you', 'what is wibraniumtech', 'tell me about', 'about you', 'company'],
+            responses: [
+                "WibraniumTech is a professional IT solutions company delivering custom software, automation systems, websites, and digital platforms for schools, factories, and small-to-medium businesses. We specialize in practical, easy-to-use, and affordable solutions that work at the ground level."
+            ]
+        },
+        gyod: {
+            keywords: ['gyod', 'get your own doctor', 'patient monitoring', 'health monitoring', 'health tracking', 'medical device'],
+            responses: [
+                "GYOD (Get Your Own Doctor) is our revolutionary health monitoring solution! It continuously tracks vital signs like Blood Pressure, ECG, temperature, and oxygen saturation in real-time. The data is displayed in our user-friendly app, enabling both patients and healthcare providers to monitor health 24/7 and take timely action. It's like having a doctor with you all the time! 🏥"
+            ]
+        },
+        services: {
+            keywords: ['service', 'what do you do', 'what can you do', 'offer', 'provide'],
+            responses: [
+                "We offer a wide range of IT services:\n\n🌐 Website Development (Business, E-commerce, School websites)\n💻 Custom Software Development (Desktop apps, ERP, Billing)\n📱 Mobile App Development\n🎓 School Management Software\n🏭 Industrial Automation & PLC Support\n📊 Barcode & QR Solutions\n📈 Digital Marketing (SEO, Google Ads, Social Media)\n🎨 Graphic Design\n\nWhat are you interested in?"
+            ]
+        },
+        website: {
+            keywords: ['website', 'web development', 'web design', 'site', 'online presence'],
+            responses: [
+                "We build fast, secure, and professional websites! Our services include:\n\n✅ Business Websites\n✅ E-commerce Stores\n✅ School/Institute Websites\n✅ Custom Websites\n\nAll our sites are mobile-friendly, SEO-optimized, and easy to manage. Interested in getting started?"
+            ]
+        },
+        software: {
+            keywords: ['software', 'application', 'desktop app', 'custom software', 'erp', 'billing'],
+            responses: [
+                "We develop custom software tailored to your exact needs:\n\n💼 Windows Desktop Applications\n🔧 Python-based Solutions\n📊 Data Entry & Validation Systems\n📈 Reporting & Analytics Tools\n🖥️ Hardware-Integrated Software\n\nOur solutions reduce manual work, increase accuracy, and scale with your business. What kind of software do you need?"
+            ]
+        },
+        school: {
+            keywords: ['school', 'education', 'student management', 'fee management', 'attendance'],
+            responses: [
+                "Our School Management Software is designed for private schools on a budget! Features include:\n\n📚 Student Admission & Records\n💰 Fee Management\n✅ Attendance Tracking\n📝 Exam & Result Management\n📊 Reports & Analytics\n\nIt's simple, affordable, and customizable to your school's needs!"
+            ]
+        },
+        automation: {
+            keywords: ['automation', 'plc', 'industrial', 'factory', 'manufacturing', 'machine'],
+            responses: [
+                "We specialize in Industrial Automation & PLC Support:\n\n🏭 PLC to PC Communication\n📡 Serial/COM Port Data Handling\n⚠️ Machine Error Code Mapping\n📊 Status Monitoring Dashboards\n🔧 Production Utility Software\n\nPerfect for manufacturing units, assembly lines, and semi-automatic machines!"
+            ]
+        },
+        barcode: {
+            keywords: ['barcode', 'qr code', 'label', 'printing', 'scanner'],
+            responses: [
+                "We provide complete Barcode & QR Code solutions:\n\n🏷️ Barcode & QR Code Generation\n🖨️ Custom Label Design & Printing\n📦 Integration with Thermal/TSC Printers\n📊 Inventory Tracking Systems\n\nIdeal for product labeling, inventory management, and warehouse tracking!"
+            ]
+        },
+        marketing: {
+            keywords: ['marketing', 'digital marketing', 'seo', 'google ads', 'social media', 'facebook ads', 'instagram'],
+            responses: [
+                "Our Digital Marketing services help you grow online:\n\n🎯 Google Ads\n📱 Facebook & Instagram Ads\n🔍 SEO (Search Engine Optimization)\n📍 Local Business Promotion\n💬 WhatsApp Marketing\n\nGet more visibility, leads, and better ROI with targeted campaigns!"
+            ]
+        },
+        pricing: {
+            keywords: ['price', 'cost', 'quote', 'how much', 'pricing', 'budget', 'affordable'],
+            responses: [
+                "Our pricing is customized based on your specific requirements to ensure you get the best value. Could you share more details about what you need? I can connect you with our team for a personalized quote. 💰",
+                "Great question! Since every project is unique, we provide tailored pricing. Tell me more about your needs, and I'll help arrange a detailed quote for you!"
+            ]
+        },
+        contact: {
+            keywords: ['contact', 'email', 'phone', 'call', 'reach', 'address', 'location'],
+            responses: [
+                "You can reach us at:\n\n📧 Email: info@wibraniumtech.com\n📞 Phone: +91 89206 17274\n📍 Location: New Delhi, India\n\nFeel free to get in touch anytime!"
+            ]
+        },
+        human: {
+            keywords: ['human', 'agent', 'real person', 'talk to someone', 'representative'],
+            responses: [
+                "I've flagged this conversation for our team. A specialist will reach out to you shortly at " + userEmail + ". In the meantime, is there anything else I can help with? 👨‍💼"
+            ]
+        }
+    };
+
+    // Smart Response Function
+    const findResponse = (input: string): string => {
+        const lowerInput = input.toLowerCase().trim();
+
+        // Check each category in knowledge base
+        for (const [category, data] of Object.entries(knowledgeBase)) {
+            for (const keyword of data.keywords) {
+                if (lowerInput.includes(keyword)) {
+                    // Return random response from available responses
+                    const responses = data.responses;
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            }
+        }
+
+        // Default fallback responses
+        const fallbacks = [
+            "That's interesting! Could you tell me more about what you're looking for? I'd love to help! 😊",
+            "I want to make sure I understand your needs correctly. Could you provide a bit more detail?",
+            "Thanks for sharing! To assist you better, could you elaborate on what you're interested in?",
+            "I'm here to help! Could you tell me more about your specific requirements or questions?"
+        ];
+
+        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+    };
+
     const handleSendMessage = async (text?: string) => {
         const messageText = text || inputValue.trim();
         if (!messageText) return;
@@ -87,19 +198,7 @@ export function LiveChatWidget() {
         const delay = Math.random() * 1000 + 1500; // 1.5s - 2.5s delay
 
         setTimeout(() => {
-            let botResponse = '';
-            const lowerMsg = messageText.toLowerCase();
-
-            // Simple Keyword Matching Logic
-            if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('quote')) {
-                botResponse = "Our pricing is tailored to project requirements. Could you share a bit more about the features you need? I can arrange a call with a senior consultant.";
-            } else if (lowerMsg.includes('service') || lowerMsg.includes('offer')) {
-                botResponse = "We specialize in Custom Software, Web Development, and Industrial Automation. Would you like to see some of our recent case studies?";
-            } else if (lowerMsg.includes('human') || lowerMsg.includes('agent')) {
-                botResponse = "I'm an AI assistant helping triage requests, but I've flagged this conversation for our specialized human team. They will email you shortly at " + userEmail + ".";
-            } else {
-                botResponse = "Thanks for sharing that. I've noted it down. Is there anything specific regarding the timeline or budget you'd like to add?";
-            }
+            const botResponse = findResponse(messageText);
 
             const botMessage: Message = {
                 id: Date.now() + 1,
