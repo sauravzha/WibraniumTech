@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, User, Stethoscope, ChevronRight, Users, Trophy, Smile, Globe, Shield, HelpCircle, Clock, Activity, Lock, Eye } from "lucide-react";
+import { Calendar as CalendarIcon, User, Stethoscope, ChevronRight, Users, Trophy, Smile, Globe, Shield, HelpCircle, Clock, Activity, Lock, Eye, Bell, History } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Layout } from "@/components/layout/Layout";
@@ -36,17 +36,17 @@ export const GYODSection = () => {
         {
             title: "Investigations",
             desc: "Our system continuously monitors vital signs—including blood pressure, ECG, temperature, oxygen saturation, and heart rate—while securely logging data for thorough analysis and early detection.",
-            author: "Admin", date: "Dec 25, 2025", comments: 3, image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            author: "Admin", date: "Feb 07, 2026", comments: 3, image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
         },
         {
             title: "Researches",
             desc: "\"Our product development is backed by ongoing research and clinical studies to ensure accuracy, reliability, and innovation in patient health monitoring\".",
-            author: "Admin", date: "Dec 25, 2025", comments: 3, image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            author: "Admin", date: "Feb 07, 2026", comments: 3, image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
         },
         {
             title: "Your Health",
             desc: "\"Your health is our priority — empowering you with real-time insights for better, proactive care\".",
-            author: "Admin", date: "Dec 25, 2025", comments: 3, image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            author: "Admin", date: "Feb 07, 2026", comments: 3, image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
         },
     ];
 
@@ -131,7 +131,7 @@ export const GYODSection = () => {
                             </h1>
                         </motion.div>
                         <p className="text-2xl md:text-4xl text-gray-200 mb-10 font-light tracking-wide max-w-3xl mx-auto leading-relaxed">
-                            <span className="text-cyan-400 font-medium">Get Your Own Device.</span> The future of proactive healthcare monitoring is here.
+                            <span className="text-cyan-400 font-medium">Get Your Own Doctor.</span> The future of proactive healthcare monitoring is here.
                         </p>
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full px-12 py-8 text-xl shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_50px_rgba(6,182,212,0.6)] transition-all duration-300 border border-white/10">
@@ -151,9 +151,9 @@ export const GYODSection = () => {
                         className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     >
                         {[
-                            { icon: <Users className="w-12 h-12 text-cyan-400" />, title: "Qualified Team", desc: "\"Our team comprises experienced healthcare professionals, engineers, and technologists dedicated to delivering reliable and innovative patient monitoring solutions\"." },
-                            { icon: <Shield className="w-12 h-12 text-cyan-400" />, title: "Quality Service", desc: "\"We are committed to providing accurate, reliable, and timely health monitoring services to ensure the best care experience for patients and healthcare providers alike\"." },
-                            { icon: <Globe className="w-12 h-12 text-cyan-400" />, title: "Global Work", desc: "\"Our solutions are designed for a global audience, supporting healthcare providers and patients around the world with accessible, real-time health monitoring technology\"." },
+                            { icon: <Activity className="w-12 h-12 text-cyan-400" />, title: "Patient Monitoring", desc: "\"Non-intrusive monitoring of vital signs and health metrics using advanced wearable technology\"." },
+                            { icon: <Bell className="w-12 h-12 text-cyan-400" />, title: "Instant Alert", desc: "\"Immediate notifications for critical health changes sent directly to healthcare providers and emergency contacts\"." },
+                            { icon: <History className="w-12 h-12 text-cyan-400" />, title: "Patient History with Tracking", desc: "\"Comprehensive digital health records with real-time tracking and historical data analysis for informed decision making\"." },
                         ].map((feature, index) => (
                             <motion.div
                                 key={index}
@@ -446,7 +446,7 @@ export const GYODSection = () => {
                 <div className="container mx-auto px-4 py-32">
                     <SectionHeading
                         badge="Happy Clients"
-                        title="What Our Clients Say"
+                        title="Our Clients Say"
                         centered
                     />
 
