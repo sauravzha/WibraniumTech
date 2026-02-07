@@ -21,11 +21,12 @@ const footerLinks = {
   ],
 };
 
+// Update social links with real URLs
 const socialLinks = [
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/wibranium-tech-4754963ab/", label: "LinkedIn" },
+  { icon: Twitter, href: "https://x.com/WibraniumTech", label: "Twitter" },
   { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/wibraniumtech?igsh=eDZ2bzk0cjdtZW9x", label: "Instagram" },
 ];
 
 export function Footer() {
@@ -50,6 +51,8 @@ export function Footer() {
                   <motion.a
                     key={social.label}
                     href={social.href}
+                    target={social.href.startsWith("http") ? "_blank" : "_self"}
+                    rel={social.href.startsWith("http") ? "noopener noreferrer" : ""}
                     aria-label={social.label}
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
