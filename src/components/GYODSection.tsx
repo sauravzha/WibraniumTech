@@ -12,9 +12,11 @@ import { motion, Variants } from "framer-motion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { AnimatedCounter, TiltCard, MedicalSphere } from "@/components/AnimatedComponents";
 import { Calendar } from "@/components/ui/calendar";
+import { Link } from "react-router-dom";
 
 export const GYODSection = () => {
     const [date, setDate] = React.useState<Date>();
+    const [showAllFeatures, setShowAllFeatures] = React.useState(false);
 
     const services = [
         { icon: <Clock className="w-8 h-8 text-cyan-400" />, title: "24/7 Health Monitoring Support", desc: "Continuous assistance to ensure uninterrupted patient care." },
@@ -130,19 +132,40 @@ export const GYODSection = () => {
                                 GYOD
                             </h1>
                         </motion.div>
-                        <p className="text-2xl md:text-4xl text-gray-200 mb-10 font-light tracking-wide max-w-3xl mx-auto leading-relaxed">
-                            <span className="text-cyan-400 font-medium">Get Your Own Doctor.</span> The future of proactive healthcare monitoring is here.
+                        <p className="text-2xl md:text-4xl text-gray-200 mb-4 font-light tracking-wide max-w-3xl mx-auto leading-relaxed">
+                            <span className="text-cyan-400 font-medium">Get Your Own Doctor. Anytime. Anywhere.</span>
                         </p>
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full px-12 py-8 text-xl shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_50px_rgba(6,182,212,0.6)] transition-all duration-300 border border-white/10">
-                                Explore Solutions
-                            </Button>
-                        </motion.div>
+                        <p className="text-lg md:text-xl text-gray-300 mb-6 max-w-3xl mx-auto leading-relaxed">
+                            Smart, cloud-based health monitoring designed especially for elderly patients who cannot visit hospitals regularly. GYOD connects patients and doctors through real-time health data, enabling early diagnosis and timely medical care from the comfort of home.
+                        </p>
+                        <div className="flex items-center justify-center gap-4 mb-8 text-cyan-400 text-sm md:text-base">
+                            <span>Remote Monitoring</span>
+                            <span>•</span>
+                            <span>Real-Time Data</span>
+                            <span>•</span>
+                            <span>Doctor Access</span>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <Link to="/contact">
+                                    <Button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full px-12 py-4 text-xl shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_50px_rgba(6,182,212,0.6)] transition-all duration-300 border border-white/10">
+                                        Request a Demo
+                                    </Button>
+                                </Link>
+                            </motion.div>
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <Link to="/contact">
+                                    <Button variant="outline" className="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-full px-12 py-4 text-xl transition-all duration-300">
+                                        Contact Us
+                                    </Button>
+                                </Link>
+                            </motion.div>
+                        </div>
                     </motion.div>
                 </div>
 
                 {/* Features Cards - Overlapping Hero with TiltCard */}
-                <div className="container mx-auto px-4 -mt-32 relative z-20">
+                <div className="container mx-auto px-4 -mt-16 relative z-20">
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
@@ -179,6 +202,340 @@ export const GYODSection = () => {
                             </motion.div>
                         ))}
                     </motion.div>
+                </div>
+
+                {/* Why GYOD? Section */}
+                <div className="py-32 relative bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
+                    <div className="container mx-auto px-4 text-center max-w-4xl">
+                        <SectionHeading
+                            badge="The Problem"
+                            title="Why GYOD?"
+                            description=""
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="space-y-6 text-lg text-gray-300 leading-relaxed"
+                        >
+                            <p>
+                                Millions of elderly and chronic patients struggle with frequent hospital visits due to age, mobility issues, and distance. Delayed medical attention often leads to serious health complications.
+                            </p>
+                            <p className="text-2xl font-bold text-cyan-400">
+                                GYOD brings the doctor to the patient—digitally.
+                            </p>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* What Makes GYOD Extraordinary Section */}
+                <div className="py-32 relative">
+                    <div className="container mx-auto px-4">
+                        <SectionHeading
+                            badge="Our Advantage"
+                            title="What Makes GYOD Extraordinary"
+                            description=""
+                        />
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16"
+                        >
+                            {[
+                                {
+                                    icon: <Clock className="w-10 h-10 text-cyan-400" />,
+                                    title: "Continuous Care, Not Occasional Checkups",
+                                    desc: "24/7 monitoring ensures health issues are detected early, not after they become critical."
+                                },
+                                {
+                                    icon: <Stethoscope className="w-10 h-10 text-cyan-400" />,
+                                    title: "Doctor-First Design",
+                                    desc: "Built to support doctors with accurate data, clear dashboards, and timely alerts."
+                                },
+                                {
+                                    icon: <Users className="w-10 h-10 text-cyan-400" />,
+                                    title: "Elderly-Friendly Technology",
+                                    desc: "Simple device design with clear OLED display, easy to use for senior citizens."
+                                },
+                                {
+                                    icon: <Globe className="w-10 h-10 text-cyan-400" />,
+                                    title: "Cloud-Powered Reliability",
+                                    desc: "Secure, scalable cloud platform for real-time and historical health data access."
+                                },
+                                {
+                                    icon: <Activity className="w-10 h-10 text-cyan-400" />,
+                                    title: "Faster Medical Decisions",
+                                    desc: "Real-time insights help doctors start treatment sooner and reduce emergencies."
+                                },
+                                {
+                                    icon: <Shield className="w-10 h-10 text-cyan-400" />,
+                                    title: "Care Beyond Hospital Walls",
+                                    desc: "Quality healthcare delivered at home, removing distance and mobility barriers."
+                                },
+                            ].map((item, index) => (
+                                <motion.div
+                                    key={index}
+                                    variants={itemVariants}
+                                    className="group"
+                                >
+                                    <div className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300 h-full">
+                                        <div className="mb-6 p-4 rounded-xl bg-cyan-500/20 w-fit group-hover:scale-110 transition-transform">
+                                            {item.icon}
+                                        </div>
+                                        <h3 className="text-xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">{item.title}</h3>
+                                        <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* What We Do Section */}
+                <div className="py-32 relative">
+                    <div className="container mx-auto px-4 text-center max-w-4xl">
+                        <SectionHeading
+                            badge="Our Solution"
+                            title="What We Do"
+                            description=""
+                        />
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="text-lg text-gray-300 leading-relaxed"
+                        >
+                            GYOD provides a smart medical device that continuously monitors vital health parameters and securely uploads the data to the cloud. Doctors can access this data anytime through a dedicated dashboard and take immediate medical action when required.
+                        </motion.p>
+                    </div>
+                </div>
+
+                {/* How It Works Section */}
+                <div className="py-32 relative bg-gradient-to-b from-[#1e293b] to-[#0f172a]">
+                    <div className="container mx-auto px-4">
+                        <SectionHeading
+                            badge="Process"
+                            title="How It Works"
+                            description="Four simple steps to smarter healthcare"
+                        />
+                        <div className="relative mt-16">
+                            <motion.div
+                                variants={containerVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative"
+                            >
+                                {/* Animated Connecting Lines */}
+                                <div className="hidden lg:block absolute top-10 left-0 right-0 h-0.5 z-0">
+                                    <motion.div
+                                        className="h-full bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+                                        initial={{ scaleX: 0, opacity: 0 }}
+                                        whileInView={{ scaleX: 1, opacity: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 2, delay: 0.5 }}
+                                        style={{
+                                            boxShadow: '0 0 20px rgba(6, 182, 212, 0.8), 0 0 40px rgba(6, 182, 212, 0.4)',
+                                            filter: 'blur(0.5px)'
+                                        }}
+                                    />
+                                </div>
+
+                                {/* Glowing Dots on the Line */}
+                                {[0, 1, 2, 3].map((dotIndex) => (
+                                    <motion.div
+                                        key={`dot-${dotIndex}`}
+                                        className="hidden lg:block absolute top-10 w-3 h-3 rounded-full bg-cyan-400 z-10"
+                                        style={{
+                                            left: `${dotIndex * 25 + 12.5}%`,
+                                            transform: 'translate(-50%, -50%)',
+                                            boxShadow: '0 0 15px rgba(6, 182, 212, 1), 0 0 30px rgba(6, 182, 212, 0.6)'
+                                        }}
+                                        initial={{ scale: 0, opacity: 0 }}
+                                        whileInView={{ scale: 1, opacity: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: 0.5 + dotIndex * 0.3 }}
+                                        animate={{
+                                            scale: [1, 1.3, 1],
+                                            boxShadow: [
+                                                '0 0 15px rgba(6, 182, 212, 1), 0 0 30px rgba(6, 182, 212, 0.6)',
+                                                '0 0 25px rgba(6, 182, 212, 1), 0 0 50px rgba(6, 182, 212, 0.8)',
+                                                '0 0 15px rgba(6, 182, 212, 1), 0 0 30px rgba(6, 182, 212, 0.6)'
+                                            ]
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            delay: dotIndex * 0.3
+                                        }}
+                                    />
+                                ))}
+
+                                {[
+                                    { step: "1", icon: <Activity className="w-10 h-10 text-cyan-400" />, title: "Smart Health Device", desc: "Installed at the patient's home to monitor daily health vitals." },
+                                    { step: "2", icon: <Globe className="w-10 h-10 text-cyan-400" />, title: "Cloud Connectivity", desc: "All health data is automatically uploaded to a secure cloud server." },
+                                    { step: "3", icon: <Stethoscope className="w-10 h-10 text-cyan-400" />, title: "Doctor Dashboard", desc: "Doctors access live and historical patient data remotely." },
+                                    { step: "4", icon: <Bell className="w-10 h-10 text-cyan-400" />, title: "Timely Medical Care", desc: "Early detection enables faster diagnosis, treatment, and emergency response." },
+                                ].map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        variants={itemVariants}
+                                        className="text-center group relative z-20"
+                                    >
+                                        <div className="relative mb-6">
+                                            <motion.div
+                                                className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center border-2 border-cyan-400 group-hover:scale-110 transition-transform duration-300"
+                                                whileHover={{
+                                                    boxShadow: '0 0 30px rgba(6, 182, 212, 0.8), 0 0 60px rgba(6, 182, 212, 0.4)'
+                                                }}
+                                            >
+                                                {item.icon}
+                                            </motion.div>
+                                            <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-cyan-400 text-[#0f172a] font-bold flex items-center justify-center text-sm shadow-[0_0_20px_rgba(6,182,212,0.6)]">
+                                                {item.step}
+                                            </div>
+                                        </div>
+                                        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">{item.title}</h3>
+                                        <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Health Parameters Monitored Section */}
+                <div className="py-32 relative">
+                    <div className="container mx-auto px-4">
+                        <SectionHeading
+                            badge="Vital Signs"
+                            title="Health Parameters Monitored"
+                            description="Live readings shown on OLED display and stored safely on the cloud"
+                        />
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 max-w-4xl mx-auto"
+                        >
+                            {[
+                                { icon: <Activity className="w-8 h-8 text-cyan-400" />, title: "Blood Pressure (BP)" },
+                                { icon: <Activity className="w-8 h-8 text-cyan-400" />, title: "ECG (Heart Activity)" },
+                                { icon: <Activity className="w-8 h-8 text-cyan-400" />, title: "Body Temperature" },
+                                { icon: <Activity className="w-8 h-8 text-cyan-400" />, title: "Pulse Rate" },
+                                { icon: <Activity className="w-8 h-8 text-cyan-400" />, title: "Oxygen Saturation (SpO₂)" },
+                            ].map((param, index) => (
+                                <motion.div
+                                    key={index}
+                                    variants={itemVariants}
+                                    className={`flex items-center gap-4 bg-white/5 p-6 rounded-xl border border-white/10 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300 group ${index === 4 ? 'md:col-span-2 md:max-w-md md:mx-auto' : ''}`}
+                                >
+                                    <div className="p-3 rounded-lg bg-cyan-500/20 group-hover:scale-110 transition-transform">
+                                        {param.icon}
+                                    </div>
+                                    <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors">{param.title}</h3>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Key Highlights Section */}
+                <div className="py-32 relative bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
+                    <div className="container mx-auto px-4">
+                        <SectionHeading
+                            badge="Features"
+                            title="Key Highlights"
+                            description=""
+                        />
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 max-w-4xl mx-auto"
+                        >
+                            {[
+                                "24/7 remote patient monitoring",
+                                "Secure cloud-based data storage",
+                                "Real-time alerts for abnormal readings",
+                                "Easy-to-use device for elderly patients",
+                                "Web & mobile access for doctors",
+                            ].map((highlight, index) => (
+                                <motion.div
+                                    key={index}
+                                    variants={itemVariants}
+                                    className="flex items-start gap-4 group"
+                                >
+                                    <div className="mt-1 p-2 rounded-full bg-cyan-500/20 group-hover:bg-cyan-500/30 transition-colors">
+                                        <div className="w-2 h-2 rounded-full bg-cyan-400"></div>
+                                    </div>
+                                    <p className="text-lg text-gray-300 group-hover:text-white transition-colors">{highlight}</p>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Who Is It For? Section */}
+                <div className="py-32 relative">
+                    <div className="container mx-auto px-4">
+                        <SectionHeading
+                            badge="Target Audience"
+                            title="Who Is It For?"
+                            description=""
+                        />
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16"
+                        >
+                            {[
+                                { icon: <Users className="w-10 h-10 text-cyan-400" />, title: "Senior citizens living at home" },
+                                { icon: <Activity className="w-10 h-10 text-cyan-400" />, title: "Chronic disease patients" },
+                                { icon: <Stethoscope className="w-10 h-10 text-cyan-400" />, title: "Post-surgery recovery patients" },
+                                { icon: <Globe className="w-10 h-10 text-cyan-400" />, title: "Rural and remote area healthcare" },
+                            ].map((audience, index) => (
+                                <motion.div
+                                    key={index}
+                                    variants={itemVariants}
+                                    className="text-center p-8 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 hover:border-cyan-400/50 transition-all duration-300 group"
+                                >
+                                    <div className="mb-4 p-4 rounded-full bg-cyan-500/20 w-fit mx-auto group-hover:scale-110 transition-transform">
+                                        {audience.icon}
+                                    </div>
+                                    <p className="text-gray-300 group-hover:text-white transition-colors">{audience.title}</p>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Our Mission Section */}
+                <div className="py-32 relative bg-gradient-to-b from-[#1e293b] to-[#0f172a]">
+                    <div className="container mx-auto px-4 text-center max-w-4xl">
+                        <SectionHeading
+                            badge="Our Purpose"
+                            title="Our Mission"
+                            description=""
+                        />
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="text-xl text-gray-300 leading-relaxed italic"
+                        >
+                            To make healthcare proactive, accessible, and reliable by enabling doctors to monitor patients remotely and deliver timely medical care without geographical barriers.
+                        </motion.p>
+                    </div>
                 </div>
 
                 {/* About Section */}
@@ -218,18 +575,17 @@ export const GYODSection = () => {
                 {/* Why Choose GYOD */}
                 <div className="py-32 relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a] to-[#1e293b] skew-y-3 transform origin-top-left -z-10 h-full w-full scale-110"></div>
-                    <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                    <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="relative order-2 lg:order-1"
+                            className="relative order-2 lg:order-1 flex items-center justify-center mt-16"
                         >
-                            <div className="absolute -inset-4 bg-cyan-500/20 rounded-3xl blur-2xl"></div>
-                            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lab Research" className="rounded-2xl shadow-2xl relative z-10 border border-white/10 w-full" />
-                            <div className="absolute -bottom-10 -right-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full p-6 animate-bounce shadow-glow-primary z-20">
-                                <ChevronRight className="w-10 h-10 text-white" />
+                            <div className="relative w-full max-w-lg">
+                                <div className="absolute -inset-4 bg-cyan-500/20 rounded-3xl blur-2xl"></div>
+                                <img src="/gyod-device.png" alt="GYOD Medical Monitoring Device" className="rounded-2xl shadow-2xl relative z-10 border border-white/10 w-full" />
                             </div>
                         </motion.div>
 
@@ -245,34 +601,53 @@ export const GYODSection = () => {
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true }}
-                                className="space-y-8"
+                                className="space-y-5 mt-8"
                             >
                                 {[
-                                    { icon: <CalendarIcon className="w-6 h-6 text-cyan-400" />, title: "Years Of Experience", desc: "\"With years of experience in healthcare technology, our team brings deep expertise and a proven track record in delivering reliable patient monitoring solutions\"." },
-                                    { icon: <HelpCircle className="w-6 h-6 text-cyan-400" />, title: "Free Consultation", desc: "\"Get expert guidance with a free consultation our team is here to help you find the right health monitoring solution for your needs\"." },
-                                    { icon: <Shield className="w-6 h-6 text-cyan-400" />, title: "100% Guaranteed", desc: "\"We stand by the quality of our products and services with a 100% satisfaction guarantee, ensuring reliability, accuracy, and peace of mind\"." },
-                                ].map((item, i) => (
-                                    <motion.div key={i} variants={itemVariants} className="flex gap-6 group">
-                                        <div className="bg-white/5 p-4 h-fit rounded-xl border border-white/10 group-hover:bg-cyan-500/10 transition-colors duration-300">
+                                    { icon: <Clock className="w-5 h-5 text-cyan-400" />, title: "Continuous Care, Not Occasional Checkups", desc: "24/7 monitoring ensures health issues are detected early, not after they become critical." },
+                                    { icon: <Stethoscope className="w-5 h-5 text-cyan-400" />, title: "Doctor-First Design", desc: "Built to support doctors with accurate data, clear dashboards, and timely alerts." },
+                                    { icon: <Users className="w-5 h-5 text-cyan-400" />, title: "Elderly-Friendly Technology", desc: "Simple device design with clear OLED display, easy to use for senior citizens." },
+                                    { icon: <Globe className="w-5 h-5 text-cyan-400" />, title: "Cloud-Powered Reliability", desc: "Secure, scalable cloud platform for real-time and historical health data access." },
+                                    { icon: <Activity className="w-5 h-5 text-cyan-400" />, title: "Faster Medical Decisions", desc: "Real-time insights help doctors start treatment sooner and reduce emergencies." },
+                                    { icon: <Shield className="w-5 h-5 text-cyan-400" />, title: "Care Beyond Hospital Walls", desc: "Quality healthcare delivered at home, removing distance and mobility barriers." },
+                                ].slice(0, showAllFeatures ? 6 : 3).map((item, i) => (
+                                    <motion.div key={i} variants={itemVariants} className="flex gap-4 group">
+                                        <div className="bg-white/5 p-3 h-fit rounded-xl border border-white/10 group-hover:bg-cyan-500/10 transition-colors duration-300 flex-shrink-0">
                                             {item.icon}
                                         </div>
                                         <div>
-                                            <h3 className="text-xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">{item.title}</h3>
+                                            <h3 className="text-lg font-bold mb-2 text-white group-hover:text-cyan-400 transition-colors">{item.title}</h3>
                                             <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
                                         </div>
                                     </motion.div>
                                 ))}
                             </motion.div>
+
+                            <motion.div
+                                className="mt-6"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                            >
+                                <Button
+                                    onClick={() => setShowAllFeatures(!showAllFeatures)}
+                                    variant="outline"
+                                    className="border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300"
+                                >
+                                    {showAllFeatures ? "Show Less" : "Read More"}
+                                    <ChevronRight className={`ml-2 w-4 h-4 transition-transform duration-300 ${showAllFeatures ? 'rotate-90' : ''}`} />
+                                </Button>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
 
-                {/* Our Services */}
+                {/* Explore GYOD Solutions */}
                 <div className="container mx-auto px-4 py-32">
                     <SectionHeading
-                        badge="Extraordinary Services"
-                        title="Our Services."
-                        description="Comprehensive features designed for your health and peace of mind."
+                        badge="Our Solutions"
+                        title="Explore GYOD Solutions"
+                        description="From smart devices to cloud dashboards—everything doctors need to monitor patients remotely."
                     />
 
                     <motion.div
@@ -282,15 +657,55 @@ export const GYODSection = () => {
                         viewport={{ once: true }}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                     >
-                        {services.map((service, index) => (
+                        {[
+                            {
+                                icon: <Stethoscope className="w-8 h-8 text-cyan-400" />,
+                                emoji: "🩺",
+                                title: "Remote Patient Monitoring",
+                                desc: "Track vital health parameters continuously from the patient's home. Enables early detection of health issues and reduces unnecessary hospital visits."
+                            },
+                            {
+                                icon: <Globe className="w-8 h-8 text-cyan-400" />,
+                                emoji: "☁️",
+                                title: "Cloud Health Platform",
+                                desc: "Securely stores patient health data on the cloud. Doctors can access real-time and historical reports anytime, anywhere."
+                            },
+                            {
+                                icon: <User className="w-8 h-8 text-cyan-400" />,
+                                emoji: "👨‍⚕️",
+                                title: "Doctor Dashboard",
+                                desc: "A smart dashboard that gives doctors live patient vitals, trends, and alerts—supporting faster and more accurate medical decisions."
+                            },
+                            {
+                                icon: <Bell className="w-8 h-8 text-cyan-400" />,
+                                emoji: "🚨",
+                                title: "Emergency Alert System",
+                                desc: "Automatically detects abnormal readings and sends instant alerts to doctors for quick medical intervention."
+                            },
+                            {
+                                icon: <Activity className="w-8 h-8 text-cyan-400" />,
+                                emoji: "📟",
+                                title: "Smart Monitoring Device",
+                                desc: "Elderly-friendly device with an OLED display showing live health readings. Simple to use, reliable, and always connected."
+                            },
+                            {
+                                icon: <Lock className="w-8 h-8 text-cyan-400" />,
+                                emoji: "🔗",
+                                title: "Integrated Care Ecosystem",
+                                desc: "Connects patients, doctors, and caregivers on a single platform—ensuring coordinated, data-driven healthcare delivery."
+                            },
+                        ].map((solution, index) => (
                             <motion.div key={index} variants={itemVariants}>
                                 <div className="flex flex-col gap-6 bg-white/5 backdrop-blur-sm p-8 hover:bg-white/10 transition-all duration-300 rounded-2xl border border-white/5 hover:border-cyan-500/30 hover:shadow-glow-primary h-full group ml-0 hover:-translate-y-2">
-                                    <div className="bg-gradient-to-br from-[#1e293b] to-[#0f172a] p-4 h-fit rounded-xl shadow-lg w-fit border border-white/10 group-hover:scale-110 transition-transform duration-300">
-                                        {service.icon}
+                                    <div className="flex items-center gap-4">
+                                        <div className="bg-gradient-to-br from-[#1e293b] to-[#0f172a] p-4 h-fit rounded-xl shadow-lg border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                                            {solution.icon}
+                                        </div>
+                                        <span className="text-4xl">{solution.emoji}</span>
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">{service.title}</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>
+                                        <h3 className="text-xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">{solution.title}</h3>
+                                        <p className="text-gray-400 text-sm leading-relaxed">{solution.desc}</p>
                                     </div>
                                 </div>
                             </motion.div>
@@ -473,6 +888,46 @@ export const GYODSection = () => {
                             </motion.div>
                         ))}
                     </motion.div>
+                </div>
+
+
+                {/* Final CTA Section */}
+                <div className="py-32 relative bg-gradient-to-b from-[#0f172a] to-[#1e293b]">
+                    <div className="container mx-auto px-4 text-center max-w-4xl">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="space-y-8"
+                        >
+                            <h2 className="text-4xl md:text-5xl font-bold text-white">
+                                Get Started with GYOD
+                            </h2>
+                            <p className="text-xl text-gray-300 leading-relaxed">
+                                Experience smarter healthcare with continuous monitoring and trusted medical support.
+                            </p>
+                            <p className="text-2xl font-semibold text-cyan-400">
+                                Get Your Own Doctor — wherever you are.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-6 justify-center pt-6">
+                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <Link to="/contact">
+                                        <Button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full px-12 py-6 text-xl shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_50px_rgba(6,182,212,0.6)] transition-all duration-300 border border-white/10">
+                                            Request a Demo
+                                        </Button>
+                                    </Link>
+                                </motion.div>
+                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <Link to="/contact">
+                                        <Button variant="outline" className="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-full px-12 py-6 text-xl transition-all duration-300">
+                                            Talk to Us
+                                        </Button>
+                                    </Link>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
 
                 {/* Spacer */}
