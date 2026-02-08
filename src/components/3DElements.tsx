@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 
 export function FloatingShapes3D() {
     const shapes = [
@@ -90,18 +90,26 @@ interface Parallax3DProps {
 
 export function Parallax3D({ children, speed = 0.5, className = "" }: Parallax3DProps) {
     const [offsetY, setOffsetY] = useState(0);
+    const ref = useRef<HTMLDivElement>(null);
+    const isInView = useInView(ref, { margin: "200px 0px" });
 
     useEffect(() => {
+        if (!isInView) return;
+
         const handleScroll = () => {
             setOffsetY(window.scrollY * speed);
         };
 
         window.addEventListener("scroll", handleScroll);
+        // Initial set
+        handleScroll();
+
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [speed]);
+    }, [speed, isInView]);
 
     return (
         <motion.div
+            ref={ref}
             className={className}
             style={{
                 transform: `translateY(${offsetY}px) translateZ(0)`,
