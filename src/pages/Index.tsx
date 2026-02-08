@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import {
   Dialog,
@@ -45,10 +45,16 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollAnimation, StaggerContainer } from "@/components/ScrollAnimation";
 import { AnimatedCounter } from "@/components/AnimatedComponents";
-import { FloatingShapes3D, Parallax3D, GlowingOrbs3D, CircuitLines3D } from "@/components/3DElements";
-import { TechParticles3D, GeometricGrid3D } from "@/components/3DElements";
-import { GrowthGraph3D } from "@/components/GrowthGraph3D";
-import { Laptop3D } from "@/components/Laptop3D";
+import { Parallax3D } from "@/components/3DElements";
+import { Lazy3DWrapper } from "@/components/Lazy3DWrapper";
+
+// Lazy load heavy 3D components for performance
+const TechParticles3D = lazy(() => import("@/components/3DElements").then(m => ({ default: m.TechParticles3D })));
+const GeometricGrid3D = lazy(() => import("@/components/3DElements").then(m => ({ default: m.GeometricGrid3D })));
+const GlowingOrbs3D = lazy(() => import("@/components/3DElements").then(m => ({ default: m.GlowingOrbs3D })));
+const CircuitLines3D = lazy(() => import("@/components/3DElements").then(m => ({ default: m.CircuitLines3D })));
+const GrowthGraph3D = lazy(() => import("@/components/GrowthGraph3D").then(m => ({ default: m.GrowthGraph3D })));
+const Laptop3D = lazy(() => import("@/components/Laptop3D").then(m => ({ default: m.Laptop3D })));
 import { Smartphone3D } from "@/components/Smartphone3D";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo.png";
@@ -212,8 +218,16 @@ export default function Index() {
           </Parallax3D>
           <div className="absolute inset-0 bg-gradient-to-r from-wibranium-slate/95 via-wibranium-slate/80 to-wibranium-slate/60" />
           <div className="absolute inset-0 gradient-mesh" />
-          <TechParticles3D />
-          <GeometricGrid3D />
+          <Suspense fallback={null}>
+            <Lazy3DWrapper>
+              <TechParticles3D />
+            </Lazy3DWrapper>
+          </Suspense>
+          <Suspense fallback={null}>
+            <Lazy3DWrapper>
+              <GeometricGrid3D />
+            </Lazy3DWrapper>
+          </Suspense>
         </div>
 
         <div className="container-custom relative z-10 w-full">
@@ -302,7 +316,11 @@ export default function Index() {
             >
               {/* Background Glow for Graph */}
               <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
-              <GrowthGraph3D />
+              <Suspense fallback={<div className="h-[400px]" />}>
+                <Lazy3DWrapper>
+                  <GrowthGraph3D />
+                </Lazy3DWrapper>
+              </Suspense>
             </motion.div>
           </div>
         </div>
@@ -310,7 +328,11 @@ export default function Index() {
 
       {/* Who We Are Section */}
       <section className="py-12 md:py-16 bg-secondary/30 relative overflow-hidden" id="who-we-are">
-        <TechParticles3D />
+        <Suspense fallback={null}>
+          <Lazy3DWrapper>
+            <TechParticles3D />
+          </Lazy3DWrapper>
+        </Suspense>
         <div className="container-custom relative z-10">
           <SectionHeading
             badge="Who We Are"
@@ -355,7 +377,11 @@ export default function Index() {
             <div className="relative h-[500px] flex items-center justify-center hidden lg:flex translate-y-28">
               {/* 3D Model matches text height better now */}
               <div className="absolute inset-0 bg-primary/10 blur-[80px] rounded-full pointer-events-none" />
-              <Laptop3D />
+              <Suspense fallback={<div className="h-[300px] w-full" />}>
+                <Lazy3DWrapper>
+                  <Laptop3D />
+                </Lazy3DWrapper>
+              </Suspense>
             </div>
           </div>
         </div>
@@ -363,7 +389,11 @@ export default function Index() {
 
       {/* Our Values Section */}
       <section className="section-padding relative overflow-hidden">
-        <GlowingOrbs3D />
+        <Suspense fallback={null}>
+          <Lazy3DWrapper>
+            <GlowingOrbs3D />
+          </Lazy3DWrapper>
+        </Suspense>
         <div className="container-custom relative z-10">
           <SectionHeading
             badge="Our Values"
@@ -393,7 +423,11 @@ export default function Index() {
 
       {/* Core Services Section */}
       <section className="section-padding bg-secondary/30 relative overflow-hidden">
-        <GeometricGrid3D />
+        <Suspense fallback={null}>
+          <Lazy3DWrapper>
+            <GeometricGrid3D />
+          </Lazy3DWrapper>
+        </Suspense>
         <div className="container-custom relative z-10">
           <ScrollAnimation direction="up" delay={0}>
             <SectionHeading
@@ -486,7 +520,11 @@ export default function Index() {
 
       {/* Our Working Process */}
       <section className="section-padding relative overflow-hidden">
-        <CircuitLines3D />
+        <Suspense fallback={null}>
+          <Lazy3DWrapper>
+            <CircuitLines3D />
+          </Lazy3DWrapper>
+        </Suspense>
         <div className="container-custom relative z-10">
           <SectionHeading
             badge="Our Working Process"
