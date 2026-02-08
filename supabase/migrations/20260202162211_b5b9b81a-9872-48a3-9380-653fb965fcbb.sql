@@ -32,11 +32,11 @@ $$;
 -- Create contact_leads table
 CREATE TABLE public.contact_leads (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name TEXT NOT NULL,
-    email TEXT NOT NULL,
-    phone TEXT,
-    message TEXT NOT NULL,
-    status TEXT NOT NULL DEFAULT 'new',
+    name TEXT NOT NULL CHECK (char_length(name) <= 100),
+    email TEXT NOT NULL CHECK (char_length(email) <= 255 AND email ~* '^[^\s@]+@[^\s@]+\.[^\s@]+$'),
+    phone TEXT CHECK (char_length(phone) <= 20),
+    message TEXT NOT NULL CHECK (char_length(message) <= 1000),
+    status TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'contacted', 'converted', 'closed')),
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
 );
